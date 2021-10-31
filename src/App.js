@@ -20,7 +20,13 @@ function App() {
             Link To Keertan Track
           </a>
         </h5>
-        <video controls name="media" src={theLinkOfTrack}></video>
+        <video
+          controls
+          autoPlay={true}
+          name="media"
+          loop
+          src={theLinkOfTrack}
+        ></video>
       </div>
     );
   }
