@@ -75,6 +75,7 @@ function App() {
         <h1>Bhai Mohinder Singh Ji SDO</h1>
         {showRandTrack()}
         <button
+          autoFocus="autofocus"
           onClick={() => {
             const randNum = Math.floor(Math.random() * 361); //in total there are 360 tracks
             setTrackIndex(randNum);
@@ -86,7 +87,6 @@ function App() {
         <h2>Search for Track:</h2>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
-            autoFocus="autofocus"
             placeholder="Bin Ek Naam"
             value={searchWord}
             onChange={(e) => {
