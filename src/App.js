@@ -41,6 +41,10 @@ function App() {
 
   const updateSearchedTracks = (theWord) => {
     if (theWord === null) return;
+    if (theWord.length === 0) {
+      setShowSearchedTracks("");
+      return;
+    }
     const allTracksWithWord = trackNamesWithNums.filter((title) =>
       title.includes(theWord.toLowerCase())
     );
@@ -91,16 +95,9 @@ function App() {
             value={searchWord}
             onChange={(e) => {
               setSearchWord(e.target.value);
+              updateSearchedTracks(e.target.value);
             }}
           />
-          <button
-            type="submit"
-            onClick={() => {
-              updateSearchedTracks(searchWord);
-            }}
-          >
-            Submit
-          </button>
         </form>
       </div>
       {showSearchedTracks}
