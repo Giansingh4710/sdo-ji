@@ -5,7 +5,53 @@ import { TRACK_NAMES, TRACK_LINKS } from "./TRACKS";
 
 function App() {
   const [trackIndex, setTrackIndex] = React.useState(-1);
-  //for searching
+
+  return (
+    <div className="App">
+      <h1>Bhai Mohinder Singh Ji SDO</h1>
+      <ShowRandTrack trackIndex={trackIndex} />
+      <button
+        autoFocus="autofocus"
+        onClick={() => {
+          const randNum = Math.floor(Math.random() * 361); //in total there are 360 tracks
+          setTrackIndex(randNum);
+        }}
+      >
+        Play Random Keertan Track
+      </button>
+      <SearchForTracks />
+    </div>
+  );
+}
+
+function ShowRandTrack({ trackIndex }) {
+  if (trackIndex === -1) {
+    return <div />;
+  }
+  const theNameOfTrack = TRACK_NAMES[trackIndex];
+  const theLinkOfTrack = TRACK_LINKS[trackIndex];
+  return (
+    <div>
+      <h3>{theNameOfTrack}</h3>
+      <h5>
+        <a href={theLinkOfTrack} target="_blank" rel="noopener noreferrer">
+          Link To Keertan Track
+        </a>
+      </h5>
+      <video
+        controls
+        autoPlay={true}
+        name="media"
+        loop
+        src={theLinkOfTrack}
+      ></video>
+      <ion-icon name="bookmark-outline"></ion-icon>
+      <ion-icon name="bookmark"></ion-icon>
+    </div>
+  );
+}
+
+function SearchForTracks() {
   const [searchWord, setSearchWord] = React.useState("");
   const [showSearchedTracks, setShowSearchedTracks] = React.useState("");
 
@@ -14,45 +60,14 @@ function App() {
     return withNum;
   });
 
-  const showRandTrack = () => {
-    if (trackIndex === -1) {
-      return;
-    }
-    const theNameOfTrack = TRACK_NAMES[trackIndex];
-    const theLinkOfTrack = TRACK_LINKS[trackIndex];
-    return (
-      <div>
-        <h3>{theNameOfTrack}</h3>
-        <h5>
-          <a href={theLinkOfTrack} target="_blank" rel="noopener noreferrer">
-            Link To Keertan Track
-          </a>
-        </h5>
-        <video
-          controls
-          autoPlay={true}
-          name="media"
-          loop
-          src={theLinkOfTrack}
-        ></video>
-      </div>
-    );
-  };
-
-  const updateSearchedTracks = (theWord) => {
-    if (theWord === null) return;
-    if (theWord.length === 0) {
+  function updateSearchedTracks(wordInInput) {
+    if (wordInInput===""){
       setShowSearchedTracks("");
       return;
     }
     const allTracksWithWord = trackNamesWithNums.filter((title) =>
-      title.includes(theWord.toLowerCase())
+      title.includes(wordInInput.toLowerCase())
     );
-
-    if (allTracksWithWord.length === 0) {
-      setShowSearchedTracks("'" + theWord + "' not in any of the tracks");
-      return;
-    }
     setShowSearchedTracks(
       <ol>
         {allTracksWithWord.map((elem) => {
@@ -72,35 +87,27 @@ function App() {
         })}
       </ol>
     );
-  };
+    if (allTracksWithWord.length === 0) {
+      setShowSearchedTracks(
+        <p>{wordInInput} not in any of the tracks</p>
+      );
+    }
+  }
+
   return (
     <div className="forSearch">
-      <div className="App">
-        <h1>Bhai Mohinder Singh Ji SDO</h1>
-        {showRandTrack()}
-        <button
-          autoFocus="autofocus"
-          onClick={() => {
-            const randNum = Math.floor(Math.random() * 361); //in total there are 360 tracks
-            setTrackIndex(randNum);
-          }}
-        >
-          Play Random Keertan Track
-        </button>
-
+      <form onSubmit={(e) => e.preventDefault()}>
         <h2>Search for Track:</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input
-            placeholder="Bin Ek Naam"
-            value={searchWord}
-            onChange={(e) => {
-              setSearchWord(e.target.value);
-              updateSearchedTracks(e.target.value);
-            }}
-          />
-        </form>
-      </div>
-      {showSearchedTracks}
+        <input
+          placeholder="Bin Ek Naam"
+          value={searchWord}
+          onChange={(e) => {
+            setSearchWord(e.target.value);
+            updateSearchedTracks(e.target.value);
+          }}
+        />
+        {showSearchedTracks}
+      </form>
     </div>
   );
 }
