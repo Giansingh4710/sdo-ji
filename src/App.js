@@ -7,10 +7,24 @@ import { TRACK_NAMES, TRACK_LINKS } from "./TRACKS";
 function App() {
   const [trackIndex, setTrackIndex] = React.useState(-1);
 
+  let savedTracks = localStorage.getItem("savedTracks");
+  if (savedTracks === null) {
+    savedTracks = JSON.stringify([]);
+  }
+  savedTracks = JSON.parse(savedTracks);
+  const [trackSaved, setTrackSaved] = React.useState(
+    savedTracks.includes(trackIndex)
+  );
+  console.log("FROM Main",savedTracks, trackSaved);
   return (
     <div className="App">
       <h1>Bhai Mohinder Singh Ji SDO</h1>
-      <ShowRandTrack trackIndex={trackIndex} />
+      <ShowRandTrack
+        trackIndex={trackIndex}
+        //trackSaved={savedTracks.includes(trackIndex)}
+        savedTracks={savedTracks}
+        //savedTracks={savedTracks}
+      />
       <button
         autoFocus="autofocus"
         onClick={() => {
@@ -24,22 +38,10 @@ function App() {
     </div>
   );
 }
-//const TEST = (savedTracks,trackIndex) => {
-  //console.log("In state");
-  //return savedTracks.includes(trackIndex);
-//};
 
-function ShowRandTrack({ trackIndex }) {
-  let savedTracks = localStorage.getItem("savedTracks");
-  if (savedTracks === null) {
-    savedTracks = JSON.stringify([]);
-  }
-  savedTracks = JSON.parse(savedTracks);
-  console.log(savedTracks, trackIndex, savedTracks.includes(trackIndex));
-
-  const [trackSaved, setTrackSaved] = React.useState(savedTracks.includes(trackIndex));
-  console.log(trackSaved);
-
+function ShowRandTrack({ trackIndex, savedTracks}) {
+  //console.log(savedTracks.includes(trackIndex));
+  console.log("Comp Rand", savedTracks.includes(trackIndex));
   if (trackIndex === -1) {
     return <div />;
   }
@@ -61,18 +63,20 @@ function ShowRandTrack({ trackIndex }) {
         loop
         src={theLinkOfTrack}
       ></video>
-      {trackSaved ? (
+      {savedTracks.includes(trackIndex) ? (
         <Bookmark
           onClick={() => {
             console.log("hii");
-            setTrackSaved(false);
+            savedTracks=savedTracks.filter(item=>item!==trackIndex);
+            console.log(savedTracks)
           }}
         />
       ) : (
         <BookmarkOutline
           onClick={() => {
             console.log("BYEE");
-            setTrackSaved(true);
+            savedTracks.push(trackIndex);
+            console.log(savedTracks)
           }}
         />
       )}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <title>SDO Ji Keertan</title>
+    <style>
+      .app {
+        text-align: center;
+        align-items: center;
+        font-family: -apple-system, blinkmacsystemfont, "segoe ui", "roboto",
+          "oxygen", "ubuntu", "cantarell", "fira sans", "droid sans",
+          "helvetica neue", sans-serif;
+      }
+      .forsearch {
+        font-family: -apple-system, blinkmacsystemfont, "segoe ui", "roboto",
+          "oxygen", "ubuntu", "cantarell", "fira sans", "droid sans",
+          "helvetica neue", sans-serif;
+      }
+      .popup {
+        width: 100px;
+        height: 150px;
+        align-items: center;
+        background-color: blue;
+      }
+    </style>
+    <script type="text/javascript" src="./TRACKS.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <h1>Bhai Mohinder Singh Ji SDO</h1>
+      <div id="trackPlaying"></div>
+      <button autofocus="autofocus" onclick="playRandTrack()">
+        Play Random Keertan Track
+      </button>
+      <SearchForTracks />
+    </div>
+  </body>
+  <script>
+    function playRandTrack() {
+      const randNum = Math.floor(Math.random() * 361); //in total there are 360 tracks
+      const playerDiv = document.getElementById("trackPlaying");
+      console.log(playerDiv);
+      const theNameOfTrack = TRACK_NAMES[trackIndex];
+      const theLinkOfTrack = TRACK_LINKS[trackIndex];
+      playerDiv.innerHtml = `
+      <h3>{theNameOfTrack}</h3>
+      <h5>
+        <a href={theLinkOfTrack} target="_blank" rel="noopener noreferrer">
+          Link To Keertan Track
+        </a>
+      </h5>
+      <video
+        controls
+        autoPlay={true}
+        name="media"
+        loop
+        src={theLinkOfTrack}
+      ></video>
+      `;
+    }
+  </script>
+</html>
