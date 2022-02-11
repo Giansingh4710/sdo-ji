@@ -47,10 +47,10 @@
       const randNum = Math.floor(Math.random() * 361); //in total there are 360 tracks
       const playerDiv = document.getElementById("trackPlaying");
       console.log(playerDiv);
-      const theNameOfTrack = TRACK_NAMES[trackIndex];
-      const theLinkOfTrack = TRACK_LINKS[trackIndex];
-      playerDiv.innerHtml = `
-      <h3>{theNameOfTrack}</h3>
+      const theNameOfTrack = TRACK_NAMES[randNum];
+      const theLinkOfTrack = TRACK_LINKS[randNum];
+      playerDiv.innerHTML = `
+      <h3>${theNameOfTrack}</h3>
       <h5>
         <a href={theLinkOfTrack} target="_blank" rel="noopener noreferrer">
           Link To Keertan Track
@@ -61,7 +61,7 @@
         autoPlay={true}
         name="media"
         loop
-        src={theLinkOfTrack}
+        src='${theLinkOfTrack}'
       ></video>
       `;
     }
