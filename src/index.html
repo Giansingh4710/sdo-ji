@@ -32,6 +32,7 @@
     </style>
     <script type="text/javascript" src="./TRACKS.js"></script>
   </head>
+
   <body>
     <div class="app">
       <h1>Bhai Mohinder Singh Ji SDO</h1>
@@ -39,20 +40,33 @@
       <button autofocus="autofocus" onclick="playRandTrack()">
         Play Random Keertan Track
       </button>
-      <SearchForTracks />
+      <div class="forSearch">
+        <div>
+          <h2>Search for Track:</h2>
+          <input
+            placeholder="Bin Ek Naam"
+            id="searchInput"
+            oninput="searchForShabad(this.value)"
+          />
+        </div>
+        <ol id="searchResults"></ol>
+      </div>
     </div>
   </body>
   <script>
     function playRandTrack() {
       const randNum = Math.floor(Math.random() * 361); //in total there are 360 tracks
+      playTrack(randNum);
+    }
+    function playTrack(trackIndex) {
       const playerDiv = document.getElementById("trackPlaying");
       console.log(playerDiv);
-      const theNameOfTrack = TRACK_NAMES[randNum];
-      const theLinkOfTrack = TRACK_LINKS[randNum];
+      const theNameOfTrack = TRACK_NAMES[trackIndex];
+      const theLinkOfTrack = TRACK_LINKS[trackIndex];
       playerDiv.innerHTML = `
       <h3>${theNameOfTrack}</h3>
       <h5>
-        <a href={theLinkOfTrack} target="_blank" rel="noopener noreferrer">
+        <a href=${theLinkOfTrack} target="_blank" rel="noopener noreferrer">
           Link To Keertan Track
         </a>
       </h5>
@@ -64,6 +78,34 @@
         src='${theLinkOfTrack}'
       ></video>
       `;
+    }
+
+    const trackNamesWithNums = TRACK_NAMES.map((elem, ind) => {
+      const withNum = ind + 1 + ") " + elem.toLowerCase();
+      return withNum;
+    });
+
+    function searchForShabad(e) {
+      const searchVal = e;
+      const ol = document.getElementById("searchResults");
+
+      const allTracksWithWord = trackNamesWithNums.filter((title) =>
+        title.includes(searchVal.toLowerCase())
+      );
+
+      ol.innerHTML = "";
+      if (searchVal === "") return;
+      for (let track of allTracksWithWord) {
+        const theNameOfTrack = track;
+        const trackIndex = parseInt(track.split(") ")[0]) - 1;
+        li = document.createElement("li");
+        li.innerHTML = `
+        <button
+        onclick="playTrack(${trackIndex})"
+        >${theNameOfTrack}</button>
+        `;
+        ol.appendChild(li);
+      }
     }
   </script>
 </html>

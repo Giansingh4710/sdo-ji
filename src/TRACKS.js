@@ -1,4 +1,3 @@
-console.log("HELLO From Track");
 const TRACK_NAMES = [
   "Aad Steh Jugad Steh",
   "Aadhi Such Jugaadi Such",
