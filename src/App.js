@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { Bookmark, BookmarkOutline } from "react-ionicons";
 
 import { TRACK_NAMES, TRACK_LINKS } from "./TRACKS";
 
@@ -23,11 +24,26 @@ function App() {
     </div>
   );
 }
+//const TEST = (savedTracks,trackIndex) => {
+  //console.log("In state");
+  //return savedTracks.includes(trackIndex);
+//};
 
 function ShowRandTrack({ trackIndex }) {
+  let savedTracks = localStorage.getItem("savedTracks");
+  if (savedTracks === null) {
+    savedTracks = JSON.stringify([]);
+  }
+  savedTracks = JSON.parse(savedTracks);
+  console.log(savedTracks, trackIndex, savedTracks.includes(trackIndex));
+
+  const [trackSaved, setTrackSaved] = React.useState(savedTracks.includes(trackIndex));
+  console.log(trackSaved);
+
   if (trackIndex === -1) {
     return <div />;
   }
+
   const theNameOfTrack = TRACK_NAMES[trackIndex];
   const theLinkOfTrack = TRACK_LINKS[trackIndex];
   return (
@@ -45,8 +61,21 @@ function ShowRandTrack({ trackIndex }) {
         loop
         src={theLinkOfTrack}
       ></video>
-      <ion-icon name="bookmark-outline"></ion-icon>
-      <ion-icon name="bookmark"></ion-icon>
+      {trackSaved ? (
+        <Bookmark
+          onClick={() => {
+            console.log("hii");
+            setTrackSaved(false);
+          }}
+        />
+      ) : (
+        <BookmarkOutline
+          onClick={() => {
+            console.log("BYEE");
+            setTrackSaved(true);
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -61,7 +90,7 @@ function SearchForTracks() {
   });
 
   function updateSearchedTracks(wordInInput) {
-    if (wordInInput===""){
+    if (wordInInput === "") {
       setShowSearchedTracks("");
       return;
     }
@@ -88,9 +117,7 @@ function SearchForTracks() {
       </ol>
     );
     if (allTracksWithWord.length === 0) {
-      setShowSearchedTracks(
-        <p>{wordInInput} not in any of the tracks</p>
-      );
+      setShowSearchedTracks(<p>{wordInInput} not in any of the tracks</p>);
     }
   }
 
