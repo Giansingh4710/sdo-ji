@@ -1,4 +1,4 @@
-export const TRACK_NAMES = [
+const TRACK_NAMES = [
   "Aad Steh Jugad Steh",
   "Aadhi Such Jugaadi Such",
   "Aae Mil Gurasikh Aae Mil",
@@ -361,7 +361,7 @@ export const TRACK_NAMES = [
   "Waheguru Gur Shabad Hai - India 1970s",
 ];
 
-export const TRACK_LINKS = [
+const TRACK_LINKS = [
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai%20Mohinder%20Singh%20SDO/Aad%20Steh%20Jugad%20Steh.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai%20Mohinder%20Singh%20SDO/Aadhi%20Such%20Jugaadi%20Such.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai%20Mohinder%20Singh%20SDO/Aae%20Mil%20Gurasikh%20Aae%20Mil.mp3",
