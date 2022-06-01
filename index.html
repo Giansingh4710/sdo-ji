@@ -184,7 +184,7 @@
                         ${theNameOfTrack}
                     </a>
                 </h3>
-                <video type="audio/mpeg" controls autoPlay={true} name="media" loop src='${theLinkOfTrack}' ></video>
+                <video onended="playNextTrack()" type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></video>
                 <button id="saveTrackBtn"> SAVE </button> `;
       activateModal();
     }
