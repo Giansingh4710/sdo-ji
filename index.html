@@ -294,6 +294,7 @@
       let savedTracks = localStorage.getItem(keertani);
       savedTracks = JSON.parse(savedTracks);
 
+      for (let i=0;i<2;i++){
       for (const theTrackInd in savedTracks) {
         const theNameOfTrack = TRACK_NAMES[theTrackInd];
         const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
@@ -305,6 +306,9 @@
           `;
         ol.appendChild(li);
         console.log(theNameOfTrack, ": ", trkMsg);
+      }
+      savedTracks = localStorage.getItem("savedTracks");
+      savedTracks = JSON.parse(savedTracks);
       }
     }
   </script>
