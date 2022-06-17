@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" />
+    <title>SDO Ji Keertan</title>
+    <style>
+      .app {
+        text-align: center;
+        align-items: center;
+        font-family: -apple-system, blinkmacsystemfont, "segoe ui", "roboto",
+          "oxygen", "ubuntu", "cantarell", "fira sans", "droid sans",
+          "helvetica neue", sans-serif;
+      }
+      .forsearch {
+        font-family: -apple-system, blinkmacsystemfont, "segoe ui", "roboto",
+          "oxygen", "ubuntu", "cantarell", "fira sans", "droid sans",
+          "helvetica neue", sans-serif;
+      }
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+      /* Modal Content */
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+      /* The Close Button */
+      .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      /* form*/
+      #form {
+        margin-top: 400px;
+        border: 3px solid #8ac007;
+      }
+    </style>
+    <script type="text/javascript" src="./TRACKS.js"></script>
+  </head>
+
+  <body class="app">
+    <h1 id="MainTitle">Bhai Mohinder Singh Ji SDO Keertan</h1>
+    <div id="trackPlaying"></div>
+    <div>
+      <h4 id="trackMsg"></h4>
+      <button onclick="playPreviousTrack()">&#8592; Previous</button>
+      <button autofocus="autofocus" onclick="playNextTrack()">
+        Next &rarr;
+      </button>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <label for="noteForSavedTrack"
+          >Enter a note if you would like (not needed):</label
+        >
+        <div>
+          <textarea
+            multiline
+            placeholder="ex: bin ek naam at 10:00"
+            id="noteForSavedTrack"
+          ></textarea>
+        </div>
+        <div>
+          <button onclick="saveTrack()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="forSearch">
+      <div>
+        <h2>Search for Track:</h2>
+        <input
+          placeholder="Bin Ek Naam"
+          id="searchInput"
+          oninput="searchForShabad(this.value)"
+        />
+      </div>
+      <ol id="searchResults"></ol>
+    </div>
+
+    <div>
+      <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
+      <ol id="savedShabads"></ol>
+    </div>
+
+    <ol>
+      <h4>Other Keertans</h4>
+      <li>
+        <a target="_blank" href="./hps.html">HPS Ji Only</a>
+      </li>
+      <li>
+        <a target="_blank" href="./sdoji.html">Sdo Ji Only</a>
+      </li>
+      <li>
+        <a target="_blank" href="./index.html">All mixed</a>
+      </li>
+    </ol>
+
+    <form
+      action="https://formsubmit.co/giansingh4710@gmail.com"
+      method="POST"
+      id="form"
+    >
+      <label for="message"
+        >Leave Suggestion or Tell me a Joke or Just say Hi👋!!!</label
+      >
+      <div class="field">
+        <textarea
+          name="message"
+          id="message"
+          rows="6"
+          placeholder="exp: 'Add this feature..' or 'There are better keertanis that SDO Ji' or 'Yoo broo. This is Bob. Cool Site broo'"
+        ></textarea>
+      </div>
+      <input value="Send Message" class="button alt" type="submit" />
+    </form>
+  </body>
+  <script>
+    let TRACK_LINKS = SDO_TRACK_LINKS;
+    let TRACK_NAMES = SDO_TRACK_NAMES;
+    const tracksPlayed = [];
+    let currentTrackPointer = -1;
+
+    function changeKeertani(person) {
+      if (person == "hps") {
+        document.getElementById("MainTitle").innerHTML =
+          "Bhai Harpreet Singh Ji Keertan";
+        TRACK_LINKS = HPS_TRACK_LINKS;
+        TRACK_NAMES = HPS_TRACK_NAMES;
+      } else if (person == "sdo") {
+        document.getElementById("MainTitle").innerText =
+          "Bhai Mohinder Singh Ji SDO Keertan";
+        TRACK_LINKS = SDO_TRACK_LINKS;
+        TRACK_NAMES = SDO_TRACK_NAMES;
+      }
+    }
+
+    function playNextTrack() {
+      if (tracksPlayed.length - 1 == currentTrackPointer) {
+        playRandTrack();
+        return;
+      }
+      currentTrackPointer += 1;
+      playTrack(tracksPlayed[currentTrackPointer]);
+    }
+
+    function playPreviousTrack() {
+      if (currentTrackPointer < 1) {
+        return;
+      }
+      currentTrackPointer -= 1;
+      playTrack(tracksPlayed[currentTrackPointer]);
+    }
+
+    function playRandTrack() {
+      const randNum = Math.floor(Math.random() * TRACK_LINKS.length); //in total there are 360 tracks
+      tracksPlayed.push(randNum);
+      currentTrackPointer += 1;
+      playTrack(randNum);
+    }
+
+    function playTrack(trkInd, pushToLst = false, showMsg = false) {
+      const h4 = document.getElementById("trackMsg");
+      h4.innerText = "";
+      if (pushToLst) {
+        tracksPlayed.push(trkInd);
+        currentTrackPointer = tracksPlayed.length - 1;
+        if (showMsg) {
+          h4.innerText = showMsg;
+        }
+      }
+
+      function activateModal() {
+        console.log("modal Activated");
+        // Get the modal
+        let modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        let btn = document.getElementById("saveTrackBtn");
+
+        // Get the <span> element that closes the modal
+        let span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+          modal.style.display = "block";
+        };
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+          modal.style.display = "none";
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
+      }
+
+      const playerDiv = document.getElementById("trackPlaying");
+      const theNameOfTrack = TRACK_NAMES[trkInd];
+      const theLinkOfTrack = TRACK_LINKS[trkInd];
+      playerDiv.innerHTML = `
+                <h3>
+                    <a href=${theLinkOfTrack} target="_blank" rel="noopener noreferrer">
+                        ${theNameOfTrack}
+                    </a>
+                </h3>
+                <video onended="playNextTrack()" type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></video>
+                <button id="saveTrackBtn"> SAVE </button> `;
+      activateModal();
+    }
+
+    function saveTrack() {
+      const note = document.getElementById("noteForSavedTrack");
+      putTrackInLocalStorage(tracksPlayed[currentTrackPointer], note.value);
+      note.value = "";
+      let modal = document.getElementById("myModal");
+      modal.style.display = "none";
+    }
+
+    function deleteSavedTrack(trkInd) {
+      const keertani = document.getElementById("MainTitle").innerText;
+      let savedTracks = localStorage.getItem(keertani);
+      savedTracks = JSON.parse(savedTracks);
+      delete savedTracks[trkInd];
+      localStorage.setItem(keertani, JSON.stringify(savedTracks));
+      toggleSavedTracks();
+      toggleSavedTracks();
+    }
+
+    function putTrackInLocalStorage(trackInd, note) {
+      const keertani = document.getElementById("MainTitle").innerText;
+      let savedTracks = localStorage.getItem(keertani);
+      if (!savedTracks) {
+        console.log("Saving tracks for first time.");
+        savedTracks = {};
+      } else {
+        savedTracks = JSON.parse(savedTracks);
+      }
+      savedTracks[trackInd] = note;
+      localStorage.setItem(keertani, JSON.stringify(savedTracks));
+    }
+
+    const trackNamesWithNums = TRACK_NAMES.map((elem, ind) => {
+      const withNum = ind + 1 + ") " + elem.toLowerCase();
+      return withNum;
+    });
+
+    function searchForShabad(e) {
+      const searchVal = e;
+      const ol = document.getElementById("searchResults");
+
+      const allTracksWithWord = trackNamesWithNums.filter((title) =>
+        title.includes(searchVal.toLowerCase())
+      );
+
+      ol.innerHTML = "";
+      if (searchVal === "") return;
+      for (let track of allTracksWithWord) {
+        const theNameOfTrack = track;
+        const theTrackInd = parseInt(track.split(") ")[0]) - 1;
+        li = document.createElement("li");
+        li.innerHTML = `<button onclick="playTrack(${theTrackInd},true)">${theNameOfTrack}</button>`;
+        ol.appendChild(li);
+      }
+    }
+
+    function toggleSavedTracks() {
+      const ol = document.getElementById("savedShabads");
+      if (ol.innerHTML !== "") {
+        ol.innerHTML = "";
+        return;
+      }
+
+      const keertani = document.getElementById("MainTitle").innerText;
+      let savedTracks = localStorage.getItem(keertani);
+      savedTracks = JSON.parse(savedTracks);
+
+      for (const theTrackInd in savedTracks) {
+        const theNameOfTrack = TRACK_NAMES[theTrackInd];
+        const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
+        li = document.createElement("li");
+        li.innerHTML = `
+          <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
+          <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
+          <p>${trkMsg}</p>
+          `;
+        ol.appendChild(li);
+        console.log(theNameOfTrack, ": ", trkMsg);
+      }
+    }
+  </script>
+</html>

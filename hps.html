@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" />
-    <title>All</title>
+    <title>Bhai HPS Ji</title>
     <style>
       .app {
         text-align: center;
@@ -64,7 +64,7 @@
   </head>
 
   <body class="app">
-    <h1 id="MainTitle">All keertanis (sdoji and hps for now)</h1>
+    <h1 id="MainTitle">Bhai Harpreet Singh Ji TO</h1>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -124,29 +124,10 @@
         <a target="_blank" href="./index.html">All mixed</a>
       </li>
     </ol>
-    <form
-      action="https://formsubmit.co/giansingh4710@gmail.com"
-      method="POST"
-      id="form"
-    >
-      <label for="message"
-        >Leave Suggestion or Tell me a Joke or Just say Hi👋!!!</label
-      >
-      <div class="field">
-        <textarea
-          name="message"
-          id="message"
-          rows="6"
-          placeholder="exp: 'Add this feature..' or 'There are better keertanis that SDO Ji' or 'Yoo broo. This is Bob. Cool Site broo'"
-        ></textarea>
-      </div>
-      <input value="Send Message" class="button alt" type="submit" />
-    </form>
   </body>
   <script>
-    let TRACK_LINKS = [...SDO_TRACK_LINKS,...HPS_TRACK_LINKS];
-    let TRACK_NAMES = [...SDO_TRACK_NAMES,...HPS_TRACK_NAMES];
-    console.log(TRACK_LINKS)
+    let TRACK_LINKS = HPS_TRACK_LINKS;
+    let TRACK_NAMES = HPS_TRACK_NAMES;
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 
@@ -168,7 +149,7 @@
     }
 
     function playRandTrack() {
-      const randNum = Math.floor(Math.random() * TRACK_LINKS.length);
+      const randNum = Math.floor(Math.random() * TRACK_LINKS.length); //in total there are 360 tracks
       tracksPlayed.push(randNum);
       currentTrackPointer += 1;
       playTrack(randNum);
