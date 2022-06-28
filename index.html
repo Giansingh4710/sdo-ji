@@ -296,7 +296,9 @@
       savedTracks = JSON.parse(savedTracks);
 
       function transferOldSaved() {
+        console.log('checked if need to tranfer')
         if (!localStorage["savedTracks"]) return;
+        console.log("transfering....")
 
         let _savedTracks = localStorage.getItem("savedTracks");
         _savedTracks = JSON.parse(_savedTracks);
@@ -308,6 +310,7 @@
         delete localStorage["savedTracks"];
       }
 
+      transferOldSaved();
       for (const theTrackInd in savedTracks) {
         const theNameOfTrack = TRACK_NAMES[theTrackInd];
         const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
