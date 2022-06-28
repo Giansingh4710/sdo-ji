@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" />
-    <title>Bhai HPS Ji</title>
+    <title>All</title>
     <style>
       .app {
         text-align: center;
@@ -64,7 +64,7 @@
   </head>
 
   <body class="app">
-    <h1 id="MainTitle">Bhai Harpreet Singh Ji TO</h1>
+    <h1 id="MainTitle">All keertanis (sdoji and hps for now)</h1>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -126,8 +126,8 @@
     </ol>
   </body>
   <script>
-    let TRACK_LINKS = HPS_TRACK_LINKS;
-    let TRACK_NAMES = HPS_TRACK_NAMES;
+    let TRACK_LINKS = [...SDO_TRACK_LINKS, ...HPS_TRACK_LINKS];
+    let TRACK_NAMES = [...SDO_TRACK_NAMES, ...HPS_TRACK_NAMES];
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" />
-    <title>All</title>
+    <title>SDO Ji Keertan</title>
     <style>
       .app {
         text-align: center;
@@ -64,7 +64,7 @@
   </head>
 
   <body class="app">
-    <h1 id="MainTitle">All keertanis (sdoji and hps for now)</h1>
+    <h1 id="MainTitle">Bhai Mohinder Singh Ji SDO Keertan</h1>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -118,12 +118,13 @@
         <a target="_blank" href="./hps.html">HPS Ji Only</a>
       </li>
       <li>
-        <a target="_blank" href="./sdoji.html">Sdo Ji Only</a>
+        <a target="_blank" href="./index.html">Sdo Ji Only</a>
       </li>
       <li>
-        <a target="_blank" href="./index.html">All mixed</a>
+        <a target="_blank" href="./all.html">All mixed</a>
       </li>
     </ol>
+
     <form
       action="https://formsubmit.co/giansingh4710@gmail.com"
       method="POST"
@@ -144,9 +145,8 @@
     </form>
   </body>
   <script>
-    let TRACK_LINKS = [...SDO_TRACK_LINKS,...HPS_TRACK_LINKS];
-    let TRACK_NAMES = [...SDO_TRACK_NAMES,...HPS_TRACK_NAMES];
-    console.log(TRACK_LINKS)
+    let TRACK_LINKS = SDO_TRACK_LINKS;
+    let TRACK_NAMES = SDO_TRACK_NAMES;
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 
@@ -294,21 +294,21 @@
       let savedTracks = localStorage.getItem(keertani);
       savedTracks = JSON.parse(savedTracks);
 
-      for (let i=0;i<2;i++){
-      for (const theTrackInd in savedTracks) {
-        const theNameOfTrack = TRACK_NAMES[theTrackInd];
-        const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
-        li = document.createElement("li");
-        li.innerHTML = `
-          <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
-          <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
-          <p>${trkMsg}</p>
-          `;
-        ol.appendChild(li);
-        console.log(theNameOfTrack, ": ", trkMsg);
-      }
-      savedTracks = localStorage.getItem("savedTracks");
-      savedTracks = JSON.parse(savedTracks);
+      for (let i = 0; i < 2; i++) {
+        for (const theTrackInd in savedTracks) {
+          const theNameOfTrack = TRACK_NAMES[theTrackInd];
+          const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
+          li = document.createElement("li");
+          li.innerHTML = `
+            <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
+            <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
+            <p>${trkMsg}</p>
+            `;
+          ol.appendChild(li);
+          console.log(theNameOfTrack, ": ", trkMsg);
+        }
+        savedTracks = localStorage.getItem("savedTracks");
+        savedTracks = JSON.parse(savedTracks);
       }
     }
   </script>
