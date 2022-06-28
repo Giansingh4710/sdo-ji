@@ -240,6 +240,7 @@
       const keertani = document.getElementById("MainTitle").innerText;
       let savedTracks = localStorage.getItem(keertani);
       savedTracks = JSON.parse(savedTracks);
+      console.log(savedTracks);
       delete savedTracks[trkInd];
       localStorage.setItem(keertani, JSON.stringify(savedTracks));
       toggleSavedTracks();
@@ -294,21 +295,30 @@
       let savedTracks = localStorage.getItem(keertani);
       savedTracks = JSON.parse(savedTracks);
 
-      for (let i = 0; i < 2; i++) {
-        for (const theTrackInd in savedTracks) {
-          const theNameOfTrack = TRACK_NAMES[theTrackInd];
-          const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
-          li = document.createElement("li");
-          li.innerHTML = `
+      function transferOldSaved() {
+        if (!localStorage["savedTracks"]) return;
+
+        let _savedTracks = localStorage.getItem("savedTracks");
+        _savedTracks = JSON.parse(_savedTracks);
+
+        for (const theTrackInd in _savedTracks) {
+          const trkMsg = _savedTracks[theTrackInd].replace("\n", " ");
+          putTrackInLocalStorage(theTrackInd, trkMsg);
+        }
+        delete localStorage["savedTracks"];
+      }
+
+      for (const theTrackInd in savedTracks) {
+        const theNameOfTrack = TRACK_NAMES[theTrackInd];
+        const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
+        li = document.createElement("li");
+        li.innerHTML = `
             <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
             <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
             <p>${trkMsg}</p>
             `;
-          ol.appendChild(li);
-          console.log(theNameOfTrack, ": ", trkMsg);
-        }
-        savedTracks = localStorage.getItem("savedTracks");
-        savedTracks = JSON.parse(savedTracks);
+        ol.appendChild(li);
+        console.log(theNameOfTrack, ": ", trkMsg);
       }
     }
   </script>
