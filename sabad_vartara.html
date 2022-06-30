@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" />
-    <title>All</title>
+    <title>Sabad Vartara</title>
     <style>
       .app {
         text-align: center;
@@ -64,7 +64,9 @@
   </head>
 
   <body class="app">
-    <h1 id="MainTitle">All keertanis (sdoji and hps for now)</h1>
+    <h1 id="MainTitle">Sabad Vartara International</h1>
+    <a href="https://www.youtube.com/channel/UCqsuEPZckzKnl2M03wp_V6w">Al Videos taken from Sabad Vartara Youtube Channel</a>
+    <pre>If anything is said out of gurmat, daas does not agree with it. Just take the anand of the keertan and leave anything you disagee with</pre>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -112,10 +114,41 @@
       <ol id="savedShabads"></ol>
     </div>
 
+    <ol>
+      <h4>Other Keertans</h4>
+      <li>
+        <a target="_blank" href="./hps.html">HPS Ji Only</a>
+      </li>
+      <li>
+        <a target="_blank" href="./index.html">Sdo Ji Only</a>
+      </li>
+      <li>
+        <a target="_blank" href="./all.html">All mixed</a>
+      </li>
+    </ol>
+
+    <form
+      action="https://formsubmit.co/giansingh4710@gmail.com"
+      method="POST"
+      id="form"
+    >
+      <label for="message"
+        >Leave Suggestion or Tell me a Joke or Just say Hi👋!!!</label
+      >
+      <div class="field">
+        <textarea
+          name="message"
+          id="message"
+          rows="6"
+          placeholder="exp: 'Add this feature..' or 'There are better keertanis that SDO Ji' or 'Yoo broo. This is Bob. Cool Site broo'"
+        ></textarea>
+      </div>
+      <input value="Send Message" class="button alt" type="submit" />
+    </form>
   </body>
   <script>
-    let TRACK_LINKS = [...SDO_TRACK_LINKS, ...HPS_TRACK_LINKS,...SABADVARTARA_TRACK_LINKS];
-    let TRACK_NAMES = [...SDO_TRACK_NAMES, ...HPS_TRACK_NAMES,...SABADVARTARA_TRACK_NAMES];
+    let TRACK_LINKS =SABADVARTARA_TRACK_LINKS;
+    let TRACK_NAMES =SABADVARTARA_TRACK_NAMES;
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 
@@ -209,6 +242,7 @@
       const keertani = document.getElementById("MainTitle").innerText;
       let savedTracks = localStorage.getItem(keertani);
       savedTracks = JSON.parse(savedTracks);
+      console.log(savedTracks);
       delete savedTracks[trkInd];
       localStorage.setItem(keertani, JSON.stringify(savedTracks));
       toggleSavedTracks();
@@ -263,15 +297,31 @@
       let savedTracks = localStorage.getItem(keertani);
       savedTracks = JSON.parse(savedTracks);
 
+      function transferOldSaved() {
+        console.log('checked if need to tranfer')
+        if (!localStorage["savedTracks"]) return;
+        console.log("transfering....")
+
+        let _savedTracks = localStorage.getItem("savedTracks");
+        _savedTracks = JSON.parse(_savedTracks);
+
+        for (const theTrackInd in _savedTracks) {
+          const trkMsg = _savedTracks[theTrackInd].replace("\n", " ");
+          putTrackInLocalStorage(theTrackInd, trkMsg);
+        }
+        delete localStorage["savedTracks"];
+      }
+
+      transferOldSaved();
       for (const theTrackInd in savedTracks) {
         const theNameOfTrack = TRACK_NAMES[theTrackInd];
         const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
         li = document.createElement("li");
         li.innerHTML = `
-          <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
-          <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
-          <p>${trkMsg}</p>
-          `;
+            <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
+            <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
+            <p>${trkMsg}</p>
+            `;
         ol.appendChild(li);
         console.log(theNameOfTrack, ": ", trkMsg);
       }
