@@ -223,7 +223,7 @@
       const theLinkOfTrack = TRACK_LINKS[trkInd];
       playerDiv.innerHTML = `
                 <h3>
-                    <a href=${theLinkOfTrack} target="_blank" rel="noopener noreferrer">
+                    <a href=${theLinkOfTrack.replaceAll(" ","%20")} target="_blank" rel="noopener noreferrer">
                         ${theNameOfTrack}
                     </a>
                 </h3>
