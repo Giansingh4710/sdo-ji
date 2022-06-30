@@ -65,6 +65,7 @@
 
   <body class="app">
     <h1 id="MainTitle">Bhai Mohinder Singh Ji SDO Keertan</h1>
+    <pre>If anything is said out of gurmat, daas does not agree with it. Just take the anand of the keertan and leave anything you disagee with</pre>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -123,6 +124,9 @@
       <li>
         <a target="_blank" href="./all.html">All mixed</a>
       </li>
+      <li>
+        <a target="_blank" href="./sabad_vartara.html">Sdoji with Video</a>
+      </li>
     </ol>
 
     <form
@@ -145,8 +149,8 @@
     </form>
   </body>
   <script>
-    let TRACK_LINKS = SDO_TRACK_LINKS;
-    let TRACK_NAMES = SDO_TRACK_NAMES;
+    let TRACK_LINKS = [...SDO_TRACK_LINKS,...SABADVARTARA_TRACK_LINKS];
+    let TRACK_NAMES = [...SDO_TRACK_NAMES,...SABADVARTARA_TRACK_NAMES];
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 
