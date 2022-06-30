@@ -65,7 +65,7 @@
 
   <body class="app">
     <h1 id="MainTitle">Sabad Vartara International</h1>
-    <a href="https://www.youtube.com/channel/UCqsuEPZckzKnl2M03wp_V6w">Al Videos taken from Sabad Vartara Youtube Channel</a>
+    <a href="https://www.youtube.com/channel/UCqsuEPZckzKnl2M03wp_V6w">All Videos taken from Sabad Vartara Youtube Channel</a>
     <pre>If anything is said out of gurmat, daas does not agree with it. Just take the anand of the keertan and leave anything you disagee with</pre>
     <div id="trackPlaying"></div>
     <div>
@@ -114,37 +114,6 @@
       <ol id="savedShabads"></ol>
     </div>
 
-    <ol>
-      <h4>Other Keertans</h4>
-      <li>
-        <a target="_blank" href="./hps.html">HPS Ji Only</a>
-      </li>
-      <li>
-        <a target="_blank" href="./index.html">Sdo Ji Only</a>
-      </li>
-      <li>
-        <a target="_blank" href="./all.html">All mixed</a>
-      </li>
-    </ol>
-
-    <form
-      action="https://formsubmit.co/giansingh4710@gmail.com"
-      method="POST"
-      id="form"
-    >
-      <label for="message"
-        >Leave Suggestion or Tell me a Joke or Just say Hi👋!!!</label
-      >
-      <div class="field">
-        <textarea
-          name="message"
-          id="message"
-          rows="6"
-          placeholder="exp: 'Add this feature..' or 'There are better keertanis that SDO Ji' or 'Yoo broo. This is Bob. Cool Site broo'"
-        ></textarea>
-      </div>
-      <input value="Send Message" class="button alt" type="submit" />
-    </form>
   </body>
   <script>
     let TRACK_LINKS =SABADVARTARA_TRACK_LINKS;
@@ -221,7 +190,7 @@
       const theLinkOfTrack = TRACK_LINKS[trkInd];
       playerDiv.innerHTML = `
                 <h3>
-                    <a href=${theLinkOfTrack} target="_blank" rel="noopener noreferrer">
+                    <a href=${theLinkOfTrack.replaceAll(" ","%20")} target="_blank" rel="noopener noreferrer">
                         ${theNameOfTrack}
                     </a>
                 </h3>
