@@ -19,6 +19,9 @@
         text-align:center;
         border: 2px solid #34568B;
       } 
+      #playNext{
+        background-color:#00FFFF;
+      }
       .forsearch {
         font-family: -apple-system, blinkmacsystemfont, "segoe ui", "roboto",
           "oxygen", "ubuntu", "cantarell", "fira sans", "droid sans",
@@ -77,8 +80,8 @@
     <div>
       <h4 id="trackMsg"></h4>
       <button onclick="playPreviousTrack()">&#8592; Previous</button>
-      <button autofocus="autofocus" onclick="playNextTrack()">
-        Next &rarr;
+      <button id="playNext" autofocus="autofocus" onclick="playNextTrack()">
+        Play &rarr;
       </button>
     </div>
 
@@ -123,6 +126,23 @@
     <ol>
       <h4>Other Keertans</h4>
       <li>
+        <a target="_blank" href="./other_pages/all/all.html">All mixed</a>
+      </li>
+      <li>
+        <a
+          target="_blank"
+          href="./other_pages/bhai_mehar_singhji/bhai_mehar_singhji.html"
+          >Bhai Mehar Singh Ji</a
+        >
+      </li>
+      <li>
+        <a
+          target="_blank"
+          href="./other_pages/talwaraJi/talwaraJi.html"
+          >Bhai Joginder Singh Ji Talwara</a
+        >
+      </li>
+      <li>
         <a
           target="_blank"
           href="./other_pages/bhai_jeevan_singhji/bhai_jeevan_singhji.html"
@@ -150,9 +170,6 @@
         <a target="_blank" href="./other_pages/sabad_vartara/sabad_vartara.html"
           >SDO Ji (Sabad Vartara Only)</a
         >
-      </li>
-      <li>
-        <a target="_blank" href="./other_pages/all/all.html">All mixed</a>
       </li>
     </ol>
 
@@ -190,6 +207,7 @@
     let currentTrackPointer = -1;
 
     function playNextTrack() {
+      document.getElementById("playNext").innerHTML="Next &rarr;"
       if (tracksPlayed.length - 1 == currentTrackPointer) {
         playRandTrack();
         return;
@@ -338,18 +356,19 @@
       savedTracks = JSON.parse(savedTracks);
 
       function transferOldSaved() {
+        const oldTitle="savedTracks";
         console.log("checked if need to tranfer");
-        if (!localStorage["savedTracks"]) return;
+        if (!localStorage[oldTitle]) return;
         console.log("transfering....");
 
-        let _savedTracks = localStorage.getItem("savedTracks");
+        let _savedTracks = localStorage.getItem(oldTitle);
         _savedTracks = JSON.parse(_savedTracks);
 
         for (const theTrackInd in _savedTracks) {
           const trkMsg = _savedTracks[theTrackInd].replace("\n", " ");
           putTrackInLocalStorage(theTrackInd, trkMsg);
         }
-        delete localStorage["savedTracks"];
+        delete localStorage[oldTitle];
       }
 
       transferOldSaved();
@@ -367,5 +386,4 @@
       }
     }
   </script>
-  margin-top:30;
 </html>
