@@ -93,7 +93,9 @@ dirr="C:/Users/gians/Desktop/test/bhai_mehar_singh/"
 # downloadPlaylist(link)
 # links=getAllSDOlinks()
 
-link="https://soundcloud.com/keertanorg/sets/bhai-mehar-singh-jee-delhi"
+link="https://soundcloud.com/satnam-singh-b/sets/dr-pritam-singh-ji-anjaan"
+[print(i) for i in getLinksForPlaylist(link)]
+link="https://soundcloud.com/nirbaankeertan/sets/dr-pritam-singh-ji-anjaan"
 [print(i) for i in getLinksForPlaylist(link)]
 
 # link='https://soundcloud.com/harsimransinghlalli/bhai-mohinder-singh-sdo-aree-bayee-gobind-naam-mat-beesrai',

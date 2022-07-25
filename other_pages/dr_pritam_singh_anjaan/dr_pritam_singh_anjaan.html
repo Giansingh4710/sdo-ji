@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" />
-    <title>All</title>
+    <title>Dr Pritam Singh</title>
     <style>
       .app {
         text-align: center;
@@ -64,12 +64,7 @@
   </head>
 
   <body class="app">
-    <h1 id="MainTitle">All keertanis</h1>
-    <h2>
-      (SDO Ji,Bhai HPS Ji,Giani Amolak Singh Ji, Bhai Jeevan Singh Ji, Talwara
-      Ji, Bhai Mehar Singh Ji)
-    </h2>
-
+    <h1 id="MainTitle">Dr Pritam Singh Ji Anjaan</h1>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -116,28 +111,11 @@
       <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
       <ol id="savedShabads"></ol>
     </div>
+
   </body>
   <script>
-    let TRACK_LINKS = [
-      ...SDO_TRACK_LINKS,
-      ...HPS_TRACK_LINKS,
-      ...SABADVARTARA_TRACK_LINKS,
-      ...GIANI_AMOLAK_TRACK_LINKS,
-      ...BHAI_JEEVAN_SINGH_JI_LINKS,
-      ...OTHER_SDO_TRACK_LINKS,
-      ...TALWARAJI_TRACK_LINKS,
-      ...ANJAAN_JI_LINKS,
-    ];
-    let TRACK_NAMES = [
-      ...SDO_TRACK_NAMES,
-      ...HPS_TRACK_NAMES,
-      ...SABADVARTARA_TRACK_NAMES,
-      ...GIANI_AMOLAK_TRACK_NAMES,
-      ...BHAI_JEEVAN_SINGH_JI_NAMES,
-      ...OTHER_SDO_TRACK_NAMES,
-      ...TALWARAJI_TRACK_NAMES,
-      ...ANJAAN_JI_NAMES,
-    ];
+    let TRACK_LINKS = ANJAAN_JI_LINKS;
+    let TRACK_NAMES = ANJAAN_JI_NAMES;
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 
@@ -210,10 +188,7 @@
       const theLinkOfTrack = TRACK_LINKS[trkInd];
       playerDiv.innerHTML = `
                 <h3>
-                    <a href=${theLinkOfTrack.replaceAll(
-                      " ",
-                      "%20"
-                    )} target="_blank" rel="noopener noreferrer">
+                    <a href=${theLinkOfTrack.replaceAll(" ","%20")} target="_blank" rel="noopener noreferrer">
                         ${theNameOfTrack}
                     </a>
                 </h3>
@@ -288,24 +263,6 @@
       let savedTracks = localStorage.getItem(keertani);
       savedTracks = JSON.parse(savedTracks);
 
-      function transferOldSaved() {
-        const oldTitle =
-          "All keertanis (SDO Ji,Bhai HPS Ji,Giani Amolak Singh Ji, Bhai Jeevan Singh Ji)";
-        console.log("checked if need to tranfer");
-        if (!localStorage[oldTitle]) return;
-        console.log("transfering....");
-
-        let _savedTracks = localStorage.getItem(oldTitle);
-        _savedTracks = JSON.parse(_savedTracks);
-
-        for (const theTrackInd in _savedTracks) {
-          const trkMsg = _savedTracks[theTrackInd].replace("\n", " ");
-          putTrackInLocalStorage(theTrackInd, trkMsg);
-        }
-        delete localStorage[oldTitle];
-      }
-
-      transferOldSaved();
       for (const theTrackInd in savedTracks) {
         const theNameOfTrack = TRACK_NAMES[theTrackInd];
         const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
