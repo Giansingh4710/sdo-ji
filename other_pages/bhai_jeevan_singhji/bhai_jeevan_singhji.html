@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" />
-    <title>All</title>
+    <title>Bhai Jeevan Singh Ji</title>
     <style>
       .app {
         text-align: center;
@@ -60,14 +60,11 @@
         border: 3px solid #8ac007;
       }
     </style>
-    <script type="text/javascript" src="../TRACKS.js"></script>
+    <script type="text/javascript" src="./TRACKS.js"></script>
   </head>
 
   <body class="app">
-    <h1 id="MainTitle">
-      All keertanis (SDO Ji,Bhai HPS Ji,Giani Amolak Singh Ji, Bhai Jeevan Singh
-      Ji)
-    </h1>
+    <h1 id="MainTitle">Bhai Sahib Bhai Jeevan Singh Ji </h1>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -114,24 +111,11 @@
       <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
       <ol id="savedShabads"></ol>
     </div>
+
   </body>
   <script>
-    let TRACK_LINKS = [
-      ...SDO_TRACK_LINKS,
-      ...HPS_TRACK_LINKS,
-      ...SABADVARTARA_TRACK_LINKS,
-      ...GIANI_AMOLAK_TRACK_LINKS,
-      ...BHAI_JEEVAN_SINGH_JI_LINKS,
-      ...OTHER_SDO_TRACK_LINKS,
-    ];
-    let TRACK_NAMES = [
-      ...SDO_TRACK_NAMES,
-      ...HPS_TRACK_NAMES,
-      ...SABADVARTARA_TRACK_NAMES,
-      ...GIANI_AMOLAK_TRACK_NAMES,
-      ...BHAI_JEEVAN_SINGH_JI_NAMES,
-      ...OTHER_SDO_TRACK_NAMES,
-    ];
+    let TRACK_LINKS = BHAI_JEEVAN_SINGH_JI_LINKS;
+    let TRACK_NAMES = BHAI_JEEVAN_SINGH_JI_NAMES;
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 
@@ -204,10 +188,7 @@
       const theLinkOfTrack = TRACK_LINKS[trkInd];
       playerDiv.innerHTML = `
                 <h3>
-                    <a href=${theLinkOfTrack.replaceAll(
-                      " ",
-                      "%20"
-                    )} target="_blank" rel="noopener noreferrer">
+                    <a href=${theLinkOfTrack.replaceAll(" ","%20")} target="_blank" rel="noopener noreferrer">
                         ${theNameOfTrack}
                     </a>
                 </h3>

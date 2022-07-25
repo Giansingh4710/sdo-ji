@@ -9,11 +9,16 @@
     <style>
       .app {
         text-align: center;
+        overflow-wrap: break-word;
         align-items: center;
         font-family: -apple-system, blinkmacsystemfont, "segoe ui", "roboto",
           "oxygen", "ubuntu", "cantarell", "fira sans", "droid sans",
           "helvetica neue", sans-serif;
       }
+      #disclaimer{
+        text-align:center;
+        border: 2px solid #34568B;
+      } 
       .forsearch {
         font-family: -apple-system, blinkmacsystemfont, "segoe ui", "roboto",
           "oxygen", "ubuntu", "cantarell", "fira sans", "droid sans",
@@ -65,7 +70,9 @@
 
   <body class="app">
     <h1 id="MainTitle">Bhai Mohinder Singh Ji SDO Keertan</h1>
-    <pre>If anything is said out of gurmat, daas does not agree with it. Just take the anand of the keertan and leave anything you disagee with</pre>
+    <div id="disclaimer">
+        If anything is said out of gurmat, daas does not agree with it. Just take the anand of the keertan and leave anything you disagee with
+    </div>
     <div id="trackPlaying"></div>
     <div>
       <h4 id="trackMsg"></h4>
@@ -116,22 +123,36 @@
     <ol>
       <h4>Other Keertans</h4>
       <li>
-        <a target="_blank" href="./other_pages/bhai_jeevan_singhji.html">Bhai Jeevan Singh Ji</a>
+        <a
+          target="_blank"
+          href="./other_pages/bhai_jeevan_singhji/bhai_jeevan_singhji.html"
+          >Bhai Jeevan Singh Ji</a
+        >
       </li>
       <li>
-        <a target="_blank" href="./other_pages/giani_amolak_singhji.html">Giani Amolak Singh Ji</a>
+        <a
+          target="_blank"
+          href="./other_pages/giani_amolak_singhji/giani_amolak_singhji.html"
+          >Giani Amolak Singh Ji</a
+        >
       </li>
       <li>
-        <a target="_blank" href="./other_pages/hps.html">HPS Ji</a>
+        <a target="_blank" href="./other_pages/hps/hps.html"
+          >Bhai Harpreet Singh Ji Toronto</a
+        >
       </li>
       <li>
-        <a target="_blank" href="./other_pages/index.html">Sdo Ji</a>
+        <a target="_blank" href="./other_pages/sdo/no_sabad_vartara.html"
+          >SDO Ji (Without Sabad Vartara)</a
+        >
       </li>
       <li>
-        <a target="_blank" href="./other_pages/sabad_vartara.html">Sdoji with Video</a>
+        <a target="_blank" href="./other_pages/sabad_vartara/sabad_vartara.html"
+          >SDO Ji (Sabad Vartara Only)</a
+        >
       </li>
       <li>
-        <a target="_blank" href="./other_pages/all.html">All mixed</a>
+        <a target="_blank" href="./other_pages/all/all.html">All mixed</a>
       </li>
     </ol>
 
@@ -155,8 +176,16 @@
     </form>
   </body>
   <script>
-    let TRACK_LINKS = [...SDO_TRACK_LINKS,...SABADVARTARA_TRACK_LINKS,...OTHER_SDO_TRACK_LINKS];
-    let TRACK_NAMES = [...SDO_TRACK_NAMES,...SABADVARTARA_TRACK_NAMES,...OTHER_SDO_TRACK_NAMES];
+    let TRACK_LINKS = [
+      ...SDO_TRACK_LINKS,
+      ...SABADVARTARA_TRACK_LINKS,
+      ...OTHER_SDO_TRACK_LINKS,
+    ];
+    let TRACK_NAMES = [
+      ...SDO_TRACK_NAMES,
+      ...SABADVARTARA_TRACK_NAMES,
+      ...OTHER_SDO_TRACK_NAMES,
+    ];
     const tracksPlayed = [];
     let currentTrackPointer = -1;
 
@@ -229,7 +258,10 @@
       const theLinkOfTrack = TRACK_LINKS[trkInd];
       playerDiv.innerHTML = `
                 <h3>
-                    <a href=${theLinkOfTrack.replaceAll(" ","%20")} target="_blank" rel="noopener noreferrer">
+                    <a href=${theLinkOfTrack.replaceAll(
+                      " ",
+                      "%20"
+                    )} target="_blank" rel="noopener noreferrer">
                         ${theNameOfTrack}
                     </a>
                 </h3>
@@ -306,9 +338,9 @@
       savedTracks = JSON.parse(savedTracks);
 
       function transferOldSaved() {
-        console.log('checked if need to tranfer')
+        console.log("checked if need to tranfer");
         if (!localStorage["savedTracks"]) return;
-        console.log("transfering....")
+        console.log("transfering....");
 
         let _savedTracks = localStorage.getItem("savedTracks");
         _savedTracks = JSON.parse(_savedTracks);
@@ -335,4 +367,5 @@
       }
     }
   </script>
+  margin-top:30;
 </html>
