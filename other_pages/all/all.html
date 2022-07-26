@@ -167,8 +167,8 @@
 
       for (const opt in ALL_OPTS) {
         const val = document.getElementById(opt).checked;
-        console.log(opt, val);
         optsLocalStrg(opt, val);
+        ALL_OPTS[opt]=val
       }
     }
 
