@@ -38,8 +38,6 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
   }
 
   function activateModal() {
-    console.log("modal Activated");
-    // Get the modal
     let modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
@@ -70,16 +68,17 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
   const theNameOfTrack = TRACK_NAMES[trkInd];
   const theLinkOfTrack = TRACK_LINKS[trkInd];
   playerDiv.innerHTML = `
-            <h3>
-                <a href=${theLinkOfTrack.replaceAll(
-                  " ",
-                  "%20"
-                )} target="_blank" rel="noopener noreferrer">
-                    ${theNameOfTrack}
-                </a>
-            </h3>
-            <video onended="playNextTrack()" type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></video>
-            <button id="saveTrackBtn"> SAVE </button> `;
+    <h3>
+        <a 
+          href=${theLinkOfTrack.replaceAll( " ", "%20")} 
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+            ${theNameOfTrack}
+        </a>
+    </h3>
+    <video onended="playNextTrack()" type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></video>
+    <button id="saveTrackBtn"> SAVE </button> `;
   activateModal();
 }
 
@@ -95,7 +94,6 @@ function deleteSavedTrack(trkInd) {
   const keertani = document.getElementById("MainTitle").innerText;
   let savedTracks = localStorage.getItem(keertani);
   savedTracks = JSON.parse(savedTracks);
-  console.log(savedTracks);
   delete savedTracks[trkInd];
   localStorage.setItem(keertani, JSON.stringify(savedTracks));
   toggleSavedTracks();
@@ -106,7 +104,6 @@ function putTrackInLocalStorage(trackInd, note) {
   const keertani = document.getElementById("MainTitle").innerText;
   let savedTracks = localStorage.getItem(keertani);
   if (!savedTracks) {
-    console.log("Saving tracks for first time.");
     savedTracks = {};
   } else {
     savedTracks = JSON.parse(savedTracks);
@@ -181,3 +178,4 @@ function toggleSavedTracks() {
     console.log(theNameOfTrack, ": ", trkMsg);
   }
 }
+

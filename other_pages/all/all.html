@@ -63,6 +63,19 @@
       <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
       <ol id="savedShabads"></ol>
     </div>
+
+    <div id="optionMenu" class="modal">
+      <div class="modal-content">
+        <form onsubmit="optsForm(event)">
+          <input type="checkbox" id="noAKV" name="noAKV" />
+          <label for="noAKV">Remove tracks that have "akv" or "adv"</label
+          ><br />
+
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+    <button onclick="optionsMenu()">Options</button>
   </body>
   <script>
     let TRACK_LINKS = [
@@ -87,4 +100,88 @@
     ];
   </script>
   <script type="text/javascript" src="../../script.js"></script>
+
+  <script>
+    const ALL_OPTS = {"noAKV":false};
+    const LOCAL_STRG_NAME = "options";
+    getOldOpts() //updates ALL_OPTS n puts right values from form data 
+
+
+    function playRandTrack() { //override the func in scripts.js file
+      const randNum = Math.floor(Math.random() * TRACK_LINKS.length);
+      for (const opt in ALL_OPTS) {
+        if(opt=="noAKV" && ALL_OPTS[opt]){
+          const trackTitle=TRACK_NAMES[randNum].toLowerCase()
+          if(trackTitle.includes("akv") || trackTitle.includes("adv")){
+            console.log(trackTitle,"track is akv")
+            playRandTrack();
+            return;
+          }
+        }
+      }
+      
+      tracksPlayed.push(randNum);
+      currentTrackPointer += 1;
+      playTrack(randNum);
+    }
+
+    function getOldOpts(){
+      const originalOpts = JSON.parse(
+        localStorage.getItem(LOCAL_STRG_NAME)
+          ? localStorage.getItem(LOCAL_STRG_NAME)
+          : "0"
+      );
+      if (originalOpts) {
+        for (const opt in ALL_OPTS) {
+          document.getElementById(opt).checked = originalOpts[opt];
+          ALL_OPTS[opt]=originalOpts[opt];
+        }
+      }
+    }
+
+    function optionsMenu() {
+      let opts = localStorage.getItem(LOCAL_STRG_NAME);
+      if (opts) {
+        opts = JSON.parse(opts);
+        for (const opt in ALL_OPTS) {
+          document.getElementById(opt).checked = opts[opt];
+        }
+      }
+
+      function activateModal() {
+        let modal = document.getElementById("optionMenu");
+        modal.style.display = "block";
+        window.onclick = function (event) {
+          // When the user clicks anywhere outside of the modal, close it
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
+      }
+      activateModal();
+    }
+
+    function optsForm(e) {
+      e.preventDefault();
+      document.getElementById("optionMenu").style.display = "none";
+
+      for (const opt in ALL_OPTS) {
+        const val = document.getElementById(opt).checked;
+        console.log(opt, val);
+        optsLocalStrg(opt, val);
+      }
+    }
+
+    function optsLocalStrg(opt, val) {
+      let opts = localStorage.getItem(LOCAL_STRG_NAME);
+      if (!opts) {
+        console.log("Options saved for first time.");
+        opts = {};
+      } else {
+        opts = JSON.parse(opts);
+      }
+      opts[opt] = val;
+      localStorage.setItem(LOCAL_STRG_NAME, JSON.stringify(opts));
+    }
+  </script>
 </html>
