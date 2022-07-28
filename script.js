@@ -77,7 +77,7 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
             ${theNameOfTrack}
         </a>
     </h3>
-    <video onended="playNextTrack()" type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></video>
+    <video onended="playNextTrack()" onerror="playNextTrack()"  type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></video>
     <button id="saveTrackBtn"> SAVE </button> `;
   activateModal();
 }
