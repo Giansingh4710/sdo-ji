@@ -1,5 +1,6 @@
 const tracksPlayed = [];
 let currentTrackPointer = -1;
+const keertani = document.getElementById("MainTitle").innerText;
 
 function playNextTrack() {
   document.getElementById("playNext").innerHTML = "Next &rarr;";
@@ -47,40 +48,50 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
     let span = document.getElementsByClassName("close")[0];
 
     // When the user clicks the button, open the modal
-    btn.onclick = function () {
+    btn.onclick = function() {
       modal.style.display = "block";
     };
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
+    span.onclick = function() {
       modal.style.display = "none";
     };
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
+    window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
       }
     };
   }
 
-  const playerDiv = document.getElementById("trackPlaying");
+  const trackPlaying = document.getElementById("trackPlaying");
   const theNameOfTrack = TRACK_NAMES[trkInd];
   const theLinkOfTrack = TRACK_LINKS[trkInd];
-  playerDiv.innerHTML = `
+  trackPlaying.innerHTML = `
     <h3>
         <a 
-          href=${theLinkOfTrack.replaceAll( " ", "%20")} 
+          href=${theLinkOfTrack.replaceAll(" ", "%20")} 
           target="_blank"
           rel="noopener noreferrer"
         >
             ${theNameOfTrack}
         </a>
     </h3>
-    <video onended="playNextTrack()" onerror="playNextTrack()"  type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></video>
-    <button id="saveTrackBtn"> SAVE </button> `;
+    <audio onended="playNextTrack()" onerror="playNextTrack()"  type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></audio>
+    <button id="saveTrackBtn"> SAVE </button> 
+  `;
   activateModal();
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: theNameOfTrack,
+      artist: keertani,
+      album: 'Vaheguru Jio'
+    })
+  }
 }
+navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack)
+navigator.mediaSession.setActionHandler('nexttrack', function() {playNextTrack()})
 
 function saveTrack() {
   const note = document.getElementById("noteForSavedTrack");
@@ -101,7 +112,6 @@ function deleteSavedTrack(trkInd) {
 }
 
 function putTrackInLocalStorage(trackInd, note) {
-  const keertani = document.getElementById("MainTitle").innerText;
   let savedTracks = localStorage.getItem(keertani);
   if (!savedTracks) {
     savedTracks = {};
@@ -148,7 +158,7 @@ function toggleSavedTracks() {
   savedTracks = JSON.parse(savedTracks);
 
   function transferOldSaved() {
-    const oldTitle = 
+    const oldTitle =
       "All keertanis (SDO Ji,Bhai HPS Ji,Giani Amolak Singh Ji, Bhai Jeevan Singh Ji)";
     console.log("checked if need to tranfer");
     if (!localStorage[oldTitle]) return;
@@ -170,10 +180,10 @@ function toggleSavedTracks() {
     const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
     li = document.createElement("li");
     li.innerHTML = `
-        <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
-        <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
-        <p>${trkMsg}</p>
-        `;
+<button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
+<button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
+<p>${trkMsg}</p>
+`;
     ol.appendChild(li);
     console.log(theNameOfTrack, ": ", trkMsg);
   }
