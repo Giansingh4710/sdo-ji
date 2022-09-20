@@ -78,7 +78,9 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
             ${theNameOfTrack}
         </a>
     </h3>
-    <audio onended="playNextTrack()" onerror="playNextTrack()"  type="audio/mpeg" controls autoPlay={true} src='${theLinkOfTrack}' ></audio>
+    <audio onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
+      your browers doesn't support this file or the the file is corrupted
+    </audio>
     <button id="saveTrackBtn"> SAVE </button> 
   `;
   activateModal();
@@ -91,7 +93,7 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
   }
 }
 navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack)
-navigator.mediaSession.setActionHandler('nexttrack', function() {playNextTrack()})
+navigator.mediaSession.setActionHandler('nexttrack', playNextTrack)
 
 function saveTrack() {
   const note = document.getElementById("noteForSavedTrack");
