@@ -45,6 +45,7 @@ def golden_khajana():
     theLink="http://sikhsoul.com/golden_khajana/index.php?q=f&f=%2FKeertan%2FBhai+Mohinder+Singh+SDO"
     theLink="http://sikhsoul.com/golden_khajana/index.php?q=f&f=%2FKeertan%2FBhai+Joginder+Singh+Talwara"
     theLink="http://sikhsoul.com/golden_khajana/index.php?q=f&f=%2FKeertan%2FBhai+Mehar+Singh"
+    theLink="http://sikhsoul.com/golden_khajana/index.php?q=f&f=%2FKeertan%2FBhai+Tejinderpal+Singh+Dulla"
     _,links=goldenKhajana(theLink)
     # path="./goldenKhajana"
     # download(links,path)
