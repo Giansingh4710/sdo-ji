@@ -1,3 +1,6 @@
+const isChromium = !!window.chrome;
+
+
 const tracksPlayed = [];
 let currentTrackPointer = -1;
 const keertani = document.getElementById("MainTitle").innerText;
@@ -77,12 +80,21 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
         >
             ${theNameOfTrack}
         </a>
-    </h3>
-    <audio onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
-      your browers doesn't support this file or the the file is corrupted
-    </audio>
-    <button id="saveTrackBtn"> SAVE </button> 
-  `;
+    </h3>`
+  if (isChromium){
+    // for some reason some files didn't play with audio tag in Chromium browsers
+    trackPlaying.innerHTML += `
+      <video onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
+        your browers doesn't support this file or the the file is corrupted
+      </video>
+      <button id="saveTrackBtn"> SAVE </button> `;
+  }else{
+    trackPlaying.innerHTML += `
+      <audio onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
+        your browers doesn't support this file or the the file is corrupted
+      </audio>
+      <button id="saveTrackBtn"> SAVE </button> `;
+  }
   activateModal();
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({

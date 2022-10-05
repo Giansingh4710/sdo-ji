@@ -1,167 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" />
-    <title>SDO Ji Keertan</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script type="text/javascript" src="./TRACKS.js"></script>
-  </head>
 
-  <body class="app">
-    <h1 id="MainTitle">Bhai Mohinder Singh Ji SDO Keertan</h1>
-    <div id="disclaimer">
-      If anything is said out of gurmat, daas does not agree with it. Just take
-      the anand of the keertan and leave anything you disagee with
-    </div>
-    <div id="trackPlaying"></div>
-    <div>
-      <h4 id="trackMsg"></h4>
-      <button onclick="playPreviousTrack()">&#8592; Previous</button>
-      <button id="playNext" autofocus="autofocus" onclick="playNextTrack()">
-        Play &rarr;
-      </button>
-    </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" />
+  <title>SDO Ji Keertan</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script type="text/javascript" src="./TRACKS.js"></script>
+</head>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <label for="noteForSavedTrack"
-          >Enter a note if you would like (not needed):</label
-        >
-        <div>
-          <textarea
-            multiline
-            placeholder="ex: bin ek naam at 10:00"
-            id="noteForSavedTrack"
-          ></textarea>
-        </div>
-        <div>
-          <button onclick="saveTrack()">Save</button>
-        </div>
-      </div>
-    </div>
+<body class="app">
+  <h1 id="MainTitle">Bhai Mohinder Singh Ji SDO Keertan</h1>
+  <div id="disclaimer">
+    If anything is said out of gurmat, daas does not agree with it. Just take
+    the anand of the keertan and leave anything you disagee with
+  </div>
+  <div id="trackPlaying"></div>
+  <div>
+    <h4 id="trackMsg"></h4>
+    <button onclick="playPreviousTrack()">&#8592; Previous</button>
+    <button id="playNext" autofocus="autofocus" onclick="playNextTrack()">
+      Play &rarr;
+    </button>
+  </div>
 
-    <div class="forSearch">
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <label for="noteForSavedTrack">Enter a note if you would like (not needed):</label>
       <div>
-        <h2>Search for Track:</h2>
-        <input
-          placeholder="Bin Ek Naam"
-          id="searchInput"
-          oninput="searchForShabad(this.value)"
-        />
+        <textarea multiline placeholder="ex: bin ek naam at 10:00" id="noteForSavedTrack"></textarea>
       </div>
-      <ol id="searchResults"></ol>
+      <div>
+        <button onclick="saveTrack()">Save</button>
+      </div>
     </div>
+  </div>
 
+  <div class="forSearch">
     <div>
-      <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
-      <ol id="savedShabads"></ol>
+      <h2>Search for Track:</h2>
+      <input placeholder="Bin Ek Naam" id="searchInput" oninput="searchForShabad(this.value)" />
     </div>
+    <ol id="searchResults"></ol>
+  </div>
 
-    <ol>
-      <h4>Other Keertans</h4>
-      <li>
-        <a target="_blank" href="./other_pages/all.html">All mixed</a>
-      </li>
-      <li>
-        <a
-          target="_blank"
-          href="./other_pages/dullaji.html"
-          >Dulla Ji</a
-        >
-      </li>
-      <li>
-        <a
-          target="_blank"
-          href="./other_pages/dr_pritam_singh_anjaan.html"
-          >Dr Pritam Singh Anjaan</a
-        >
-      </li>
-      <li>
-        <a
-          target="_blank"
-          href="./other_pages/bhai_mehar_singhji.html"
-          >Bhai Mehar Singh Ji</a
-        >
-      </li>
-      <li>
-        <a target="_blank" href="./other_pages/talwaraJi.html"
-          >Bhai Joginder Singh Ji Talwara</a
-        >
-      </li>
-      <li>
-        <a
-          target="_blank"
-          href="./other_pages/bhai_jeevan_singhji.html"
-          >Bhai Jeevan Singh Ji</a
-        >
-      </li>
-      <li>
-        <a
-          target="_blank"
-          href="./other_pages/giani_amolak_singhji.html"
-          >Giani Amolak Singh Ji</a
-        >
-      </li>
-      <li>
-        <a target="_blank" href="./other_pages/hps.html"
-          >Bhai Harpreet Singh Ji Toronto</a
-        >
-      </li>
-      <li>
-        <a target="_blank" href="./other_pages/no_sabad_vartara.html"
-          >SDO Ji (Without Sabad Vartara)</a
-        >
-      </li>
-      <li>
-        <a target="_blank" href="./other_pages/sabad_vartara.html"
-          >SDO Ji (Sabad Vartara Only)</a
-        >
-      </li>
-      <li>
-        <a target="_blank" href="https://giansingh4710.github.io/paathPlayer/"
-          >Paath Player</a
-        >
-      </li>
-    </ol>
+  <div>
+    <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
+    <ol id="savedShabads"></ol>
+  </div>
 
-    <form
-      action="https://formsubmit.co/giansingh4710@gmail.com"
-      method="POST"
-      id="form"
-    >
-      <label for="message"
-        >Leave Suggestion or Tell me a Joke or Just say Hi👋!!!</label
-      >
-      <div class="field">
-        <textarea
-          name="message"
-          id="message"
-          rows="6"
-          placeholder="exp: 'Add this feature..' or 'There are better keertanis that SDO Ji' or 'Yoo broo. This is Bob. Cool Site broo'"
-        ></textarea>
-      </div>
-      <input value="Send Message" class="button alt" type="submit" />
-    </form>
-  </body>
-  <script>
-    let TRACK_LINKS = [
-      ...SDO_TRACK_LINKS,
-      ...SABADVARTARA_TRACK_LINKS,
-      ...OTHER_SDO_TRACK_LINKS,
-      ...OTHER_SDO_TRACK_LINKS2,
-    ];
-    let TRACK_NAMES = [
-      ...SDO_TRACK_NAMES,
-      ...SABADVARTARA_TRACK_NAMES,
-      ...OTHER_SDO_TRACK_NAMES,
-      ...OTHER_SDO_TRACK_NAMES2,
-    ];
-  </script>
-  <script type="text/javascript" src="./script.js"></script>
+  <ol>
+    <h4>Other Keertans</h4>
+    <li>
+      <a href="./other_pages/all.html">All mixed</a>
+    </li>
+    <li>
+      <a href="./other_pages/dullaji.html">Dulla Ji</a>
+    </li>
+    <li>
+      <a href="./other_pages/dr_pritam_singh_anjaan.html">Dr Pritam Singh Anjaan</a>
+    </li>
+    <li>
+      <a href="./other_pages/bhai_mehar_singhji.html">Bhai Mehar Singh Ji</a>
+    </li>
+    <li>
+      <a href="./other_pages/talwaraJi.html">Bhai Joginder Singh Ji Talwara</a>
+    </li>
+    <li>
+      <a href="./other_pages/bhai_jeevan_singhji.html">Bhai Jeevan Singh Ji</a>
+    </li>
+    <li>
+      <a href="./other_pages/giani_amolak_singhji.html">Giani Amolak Singh Ji</a>
+    </li>
+    <li>
+      <a href="./other_pages/hps.html">Bhai Harpreet Singh Ji Toronto</a>
+    </li>
+    <li>
+      <a href="./other_pages/no_sabad_vartara.html">SDO Ji (Without Sabad Vartara)</a>
+    </li>
+    <li>
+      <a href="./other_pages/sabad_vartara.html">SDO Ji (Sabad Vartara Only)</a>
+    </li>
+    <li>
+      <a href="https://giansingh4710.github.io/paathPlayer/">Paath Player</a>
+    </li>
+  </ol>
+
+  <form action="https://formsubmit.co/giansingh4710@gmail.com" method="POST" id="form">
+    <label for="message">Leave Suggestion or Tell me a Joke or Just say Hi👋!!!</label>
+    <div class="field">
+      <textarea name="message" id="message" rows="6"
+        placeholder="exp: 'Add this feature..' or 'There are better keertanis that SDO Ji' or 'Yoo broo. This is Bob. Cool Site broo'"></textarea>
+    </div>
+    <input value="Send Message" class="button alt" type="submit" />
+  </form>
+</body>
+<script>
+  let TRACK_LINKS = [
+    ...SDO_TRACK_LINKS,
+    ...SABADVARTARA_TRACK_LINKS,
+    ...OTHER_SDO_TRACK_LINKS,
+    ...OTHER_SDO_TRACK_LINKS2,
+  ];
+  let TRACK_NAMES = [
+    ...SDO_TRACK_NAMES,
+    ...SABADVARTARA_TRACK_NAMES,
+    ...OTHER_SDO_TRACK_NAMES,
+    ...OTHER_SDO_TRACK_NAMES2,
+  ];
+</script>
+<script type="text/javascript" src="./script.js"></script>
+
 </html>

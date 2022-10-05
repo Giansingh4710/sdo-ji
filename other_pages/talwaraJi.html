@@ -1,68 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" />
-    <title>Talwara Ji</title>
-    <link rel="stylesheet" type="text/css" href="../styles.css" />
-    <script type="text/javascript" src="../TRACKS.js"></script>
-  </head>
+<div>
+  <a href="../">
+    Back to Main
+  </a>
+  <br />
+  <br />
+</div>
 
-  <body class="app">
-    <h1 id="MainTitle">Bhai Joginder Singh Ji Talwara</h1>
-    <div id="trackPlaying"></div>
-    <div>
-      <h4 id="trackMsg"></h4>
-      <button onclick="playPreviousTrack()">&#8592; Previous</button>
-      <button id="playNext" autofocus="autofocus" onclick="playNextTrack()">
-        Play &rarr;
-      </button>
-    </div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" />
+  <title>Talwara Ji</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css" />
+  <script type="text/javascript" src="../TRACKS.js"></script>
+</head>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <label for="noteForSavedTrack"
-          >Enter a note if you would like (not needed):</label
-        >
-        <div>
-          <textarea
-            multiline
-            placeholder="ex: bin ek naam at 10:00"
-            id="noteForSavedTrack"
-          ></textarea>
-        </div>
-        <div>
-          <button onclick="saveTrack()">Save</button>
-        </div>
-      </div>
-    </div>
+<body class="app">
+  <h1 id="MainTitle">Bhai Joginder Singh Ji Talwara</h1>
+  <div id="trackPlaying"></div>
+  <div>
+    <h4 id="trackMsg"></h4>
+    <button onclick="playPreviousTrack()">&#8592; Previous</button>
+    <button id="playNext" autofocus="autofocus" onclick="playNextTrack()">
+      Play &rarr;
+    </button>
+  </div>
 
-    <div class="forSearch">
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <label for="noteForSavedTrack">Enter a note if you would like (not needed):</label>
       <div>
-        <h2>Search for Track:</h2>
-        <input
-          placeholder="Bin Ek Naam"
-          id="searchInput"
-          oninput="searchForShabad(this.value)"
-        />
+        <textarea multiline placeholder="ex: bin ek naam at 10:00" id="noteForSavedTrack"></textarea>
       </div>
-      <ol id="searchResults"></ol>
+      <div>
+        <button onclick="saveTrack()">Save</button>
+      </div>
     </div>
+  </div>
 
+  <div class="forSearch">
     <div>
-      <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
-      <ol id="savedShabads"></ol>
+      <h2>Search for Track:</h2>
+      <input placeholder="Bin Ek Naam" id="searchInput" oninput="searchForShabad(this.value)" />
     </div>
+    <ol id="searchResults"></ol>
+  </div>
 
-  </body>
-  <script>
-    let TRACK_LINKS = TALWARAJI_TRACK_LINKS;
-    let TRACK_NAMES = TALWARAJI_TRACK_NAMES;
-  </script>
-  <script type="text/javascript" src="../script.js"></script>
+  <div>
+    <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
+    <ol id="savedShabads"></ol>
+  </div>
+
+  <div>
+    <a href="../">
+      Back to Main
+    </a>
+    <br />
+    <br />
+  </div>
+
+</body>
+<script>
+  let TRACK_LINKS = TALWARAJI_TRACK_LINKS;
+  let TRACK_NAMES = TALWARAJI_TRACK_NAMES;
+</script>
+<script type="text/javascript" src="../script.js"></script>
+
 </html>

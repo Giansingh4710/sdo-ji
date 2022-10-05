@@ -1,191 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" />
-    <title>All</title>
-    <link rel="stylesheet" type="text/css" href="../styles.css" />
-    <script type="text/javascript" src="../TRACKS.js"></script>
-  </head>
 
-  <body class="app">
-    <h1 id="MainTitle">All keertanis</h1>
-    <h2>
-      (SDO Ji,Bhai HPS Ji,Giani Amolak Singh Ji, Bhai Jeevan Singh Ji, Talwara
-      Ji, Bhai Mehar Singh Ji, Anjaan Ji, Dulla Ji)
-    </h2>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" />
+  <title>All</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css" />
+  <script type="text/javascript" src="../TRACKS.js"></script>
+</head>
 
-    <div id="trackPlaying"></div>
-    <div>
-      <h4 id="trackMsg"></h4>
-      <button onclick="playPreviousTrack()">&#8592; Previous</button>
-      <button id="playNext" autofocus="autofocus" onclick="playNextTrack()">
-        Play &rarr;
-      </button>
-    </div>
+<body class="app">
+  <h1 id="MainTitle">All keertanis</h1>
+  <h2>
+    (SDO Ji,Bhai HPS Ji,Giani Amolak Singh Ji, Bhai Jeevan Singh Ji, Talwara
+    Ji, Bhai Mehar Singh Ji, Anjaan Ji, Dulla Ji)
+  </h2>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <label for="noteForSavedTrack"
-          >Enter a note if you would like (not needed):</label
-        >
-        <div>
-          <textarea
-            multiline
-            placeholder="ex: bin ek naam at 10:00"
-            id="noteForSavedTrack"
-          ></textarea>
-        </div>
-        <div>
-          <button onclick="saveTrack()">Save</button>
-        </div>
-      </div>
-    </div>
+  <div id="trackPlaying"></div>
+  <div>
+    <h4 id="trackMsg"></h4>
+    <button onclick="playPreviousTrack()">&#8592; Previous</button>
+    <button id="playNext" autofocus="autofocus" onclick="playNextTrack()">
+      Play &rarr;
+    </button>
+  </div>
 
-    <div class="forSearch">
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <label for="noteForSavedTrack">Enter a note if you would like (not needed):</label>
       <div>
-        <h2>Search for Track:</h2>
-        <input
-          placeholder="Bin Ek Naam"
-          id="searchInput"
-          oninput="searchForShabad(this.value)"
-        />
+        <textarea multiline placeholder="ex: bin ek naam at 10:00" id="noteForSavedTrack"></textarea>
       </div>
-      <ol id="searchResults"></ol>
+      <div>
+        <button onclick="saveTrack()">Save</button>
+      </div>
     </div>
+  </div>
 
+  <div class="forSearch">
     <div>
-      <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
-      <ol id="savedShabads"></ol>
+      <h2>Search for Track:</h2>
+      <input placeholder="Bin Ek Naam" id="searchInput" oninput="searchForShabad(this.value)" />
     </div>
+    <ol id="searchResults"></ol>
+  </div>
 
-    <div id="optionMenu" class="modal">
-      <div class="modal-content">
-        <form onsubmit="optsForm(event)">
-          <input type="checkbox" id="noAKV" name="noAKV" />
-          <label for="noAKV">Remove tracks that have "akv" or "adv"</label
-          ><br />
+  <div>
+    <button onclick="toggleSavedTracks()">Toggle Saved Tracks</button>
+    <ol id="savedShabads"></ol>
+  </div>
 
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
+  <div>
+    <a href="../">
+      Back to Main
+    </a>
+    <br/>
+    <br/>
+  </div>
+
+  <div id="optionMenu" class="modal">
+    <div class="modal-content">
+      <form onsubmit="optsForm(event)">
+        <input type="checkbox" id="noAKV" name="noAKV" />
+        <label for="noAKV">Remove tracks that have "akv" or "adv"</label><br />
+
+        <input type="submit" value="Submit" />
+      </form>
     </div>
-    <button onclick="optionsMenu()">Options</button>
-  </body>
-  <script>
-    let TRACK_LINKS = [
-      ...SDO_TRACK_LINKS,
-      ...HPS_TRACK_LINKS,
-      ...SABADVARTARA_TRACK_LINKS,
-      ...GIANI_AMOLAK_TRACK_LINKS,
-      ...BHAI_JEEVAN_SINGH_JI_LINKS,
-      ...OTHER_SDO_TRACK_LINKS,
-      ...TALWARAJI_TRACK_LINKS,
-      ...ANJAAN_JI_LINKS,
-      ...OTHER_SDO_TRACK_LINKS2,
-      ...DULLAJI_LINKS,
-    ];
-    let TRACK_NAMES = [
-      ...SDO_TRACK_NAMES,
-      ...HPS_TRACK_NAMES,
-      ...SABADVARTARA_TRACK_NAMES,
-      ...GIANI_AMOLAK_TRACK_NAMES,
-      ...BHAI_JEEVAN_SINGH_JI_NAMES,
-      ...OTHER_SDO_TRACK_NAMES,
-      ...TALWARAJI_TRACK_NAMES,
-      ...ANJAAN_JI_NAMES,
-      ...OTHER_SDO_TRACK_NAMES2,
-      ...DULLAJI_NAMES,
-    ];
-  </script>
-  <script type="text/javascript" src="../script.js"></script>
+  </div>
+  <button onclick="optionsMenu()">Options</button>
+</body>
+<script>
+  let TRACK_LINKS = [
+    ...SDO_TRACK_LINKS,
+    ...HPS_TRACK_LINKS,
+    ...SABADVARTARA_TRACK_LINKS,
+    ...GIANI_AMOLAK_TRACK_LINKS,
+    ...BHAI_JEEVAN_SINGH_JI_LINKS,
+    ...OTHER_SDO_TRACK_LINKS,
+    ...TALWARAJI_TRACK_LINKS,
+    ...ANJAAN_JI_LINKS,
+    ...OTHER_SDO_TRACK_LINKS2,
+    ...DULLAJI_LINKS,
+  ];
+  let TRACK_NAMES = [
+    ...SDO_TRACK_NAMES,
+    ...HPS_TRACK_NAMES,
+    ...SABADVARTARA_TRACK_NAMES,
+    ...GIANI_AMOLAK_TRACK_NAMES,
+    ...BHAI_JEEVAN_SINGH_JI_NAMES,
+    ...OTHER_SDO_TRACK_NAMES,
+    ...TALWARAJI_TRACK_NAMES,
+    ...ANJAAN_JI_NAMES,
+    ...OTHER_SDO_TRACK_NAMES2,
+    ...DULLAJI_NAMES,
+  ];
+</script>
+<script type="text/javascript" src="../script.js"></script>
 
-  <script>
-    const ALL_OPTS = {"noAKV":false};
-    const LOCAL_STRG_NAME = "options";
-    getOldOpts() //updates ALL_OPTS n puts right values from form data 
+<script>
+  const ALL_OPTS = {"noAKV": false};
+  const LOCAL_STRG_NAME = "options";
+  getOldOpts() //updates ALL_OPTS n puts right values from form data 
 
 
-    function playRandTrack() { //override the func in scripts.js file
-      const randNum = Math.floor(Math.random() * TRACK_LINKS.length);
+  function playRandTrack() { //override the func in scripts.js file
+    const randNum = Math.floor(Math.random() * TRACK_LINKS.length);
+    for (const opt in ALL_OPTS) {
+      if (opt == "noAKV" && ALL_OPTS[opt]) {
+        const trackTitle = TRACK_NAMES[randNum].toLowerCase()
+        if (trackTitle.includes("akv") || trackTitle.includes("adv")) {
+          console.log(trackTitle, "track is akv")
+          playRandTrack();
+          return;
+        }
+      }
+    }
+
+    tracksPlayed.push(randNum);
+    currentTrackPointer += 1;
+    playTrack(randNum);
+  }
+
+  function getOldOpts() {
+    const originalOpts = JSON.parse(
+      localStorage.getItem(LOCAL_STRG_NAME)
+        ? localStorage.getItem(LOCAL_STRG_NAME)
+        : "0"
+    );
+    if (originalOpts) {
       for (const opt in ALL_OPTS) {
-        if(opt=="noAKV" && ALL_OPTS[opt]){
-          const trackTitle=TRACK_NAMES[randNum].toLowerCase()
-          if(trackTitle.includes("akv") || trackTitle.includes("adv")){
-            console.log(trackTitle,"track is akv")
-            playRandTrack();
-            return;
-          }
-        }
-      }
-      
-      tracksPlayed.push(randNum);
-      currentTrackPointer += 1;
-      playTrack(randNum);
-    }
-
-    function getOldOpts(){
-      const originalOpts = JSON.parse(
-        localStorage.getItem(LOCAL_STRG_NAME)
-          ? localStorage.getItem(LOCAL_STRG_NAME)
-          : "0"
-      );
-      if (originalOpts) {
-        for (const opt in ALL_OPTS) {
-          document.getElementById(opt).checked = originalOpts[opt];
-          ALL_OPTS[opt]=originalOpts[opt];
-        }
+        document.getElementById(opt).checked = originalOpts[opt];
+        ALL_OPTS[opt] = originalOpts[opt];
       }
     }
+  }
 
-    function optionsMenu() {
-      let opts = localStorage.getItem(LOCAL_STRG_NAME);
-      if (opts) {
-        opts = JSON.parse(opts);
-        for (const opt in ALL_OPTS) {
-          document.getElementById(opt).checked = opts[opt];
-        }
-      }
-
-      function activateModal() {
-        let modal = document.getElementById("optionMenu");
-        modal.style.display = "block";
-        window.onclick = function (event) {
-          // When the user clicks anywhere outside of the modal, close it
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        };
-      }
-      activateModal();
-    }
-
-    function optsForm(e) {
-      e.preventDefault();
-      document.getElementById("optionMenu").style.display = "none";
-
+  function optionsMenu() {
+    let opts = localStorage.getItem(LOCAL_STRG_NAME);
+    if (opts) {
+      opts = JSON.parse(opts);
       for (const opt in ALL_OPTS) {
-        const val = document.getElementById(opt).checked;
-        optsLocalStrg(opt, val);
-        ALL_OPTS[opt]=val
+        document.getElementById(opt).checked = opts[opt];
       }
     }
 
-    function optsLocalStrg(opt, val) {
-      let opts = localStorage.getItem(LOCAL_STRG_NAME);
-      if (!opts) {
-        console.log("Options saved for first time.");
-        opts = {};
-      } else {
-        opts = JSON.parse(opts);
-      }
-      opts[opt] = val;
-      localStorage.setItem(LOCAL_STRG_NAME, JSON.stringify(opts));
+    function activateModal() {
+      let modal = document.getElementById("optionMenu");
+      modal.style.display = "block";
+      window.onclick = function (event) {
+        // When the user clicks anywhere outside of the modal, close it
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
     }
-  </script>
+    activateModal();
+  }
+
+  function optsForm(e) {
+    e.preventDefault();
+    document.getElementById("optionMenu").style.display = "none";
+
+    for (const opt in ALL_OPTS) {
+      const val = document.getElementById(opt).checked;
+      optsLocalStrg(opt, val);
+      ALL_OPTS[opt] = val
+    }
+  }
+
+  function optsLocalStrg(opt, val) {
+    let opts = localStorage.getItem(LOCAL_STRG_NAME);
+    if (!opts) {
+      console.log("Options saved for first time.");
+      opts = {};
+    } else {
+      opts = JSON.parse(opts);
+    }
+    opts[opt] = val;
+    localStorage.setItem(LOCAL_STRG_NAME, JSON.stringify(opts));
+  }
+</script>
+
 </html>
