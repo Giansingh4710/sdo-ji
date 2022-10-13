@@ -1,5 +1,9 @@
-// let isChromium = !!window.chrome;
 let isChromium = false;
+try{
+  isChromium = !!window.chrome;
+}catch (err){
+  console.log(err);
+}
 
 
 const tracksPlayed = [];
