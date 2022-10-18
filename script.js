@@ -1,14 +1,17 @@
 let isChromium = false;
-try{
+try {
   isChromium = !!window.chrome;
-}catch (err){
+} catch (err) {
   console.log(err);
 }
-
 
 const tracksPlayed = [];
 let currentTrackPointer = -1;
 const keertani = document.getElementById("MainTitle").innerText;
+playTrackFromLastTime()
+
+navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack)
+navigator.mediaSession.setActionHandler('nexttrack', playNextTrack)
 
 function playNextTrack() {
   document.getElementById("playNext").innerHTML = "Next &rarr;";
@@ -48,28 +51,17 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
 
   function activateModal() {
     let modal = document.getElementById("myModal");
-
     // Get the button that opens the modal
     let btn = document.getElementById("saveTrackBtn");
-
     // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("close")[0];
-
     // When the user clicks the button, open the modal
-    btn.onclick = function() {
-      modal.style.display = "block";
-    };
-
+    btn.onclick = function() { modal.style.display = "block";};
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    };
-
+    span.onclick = function() { modal.style.display = "none";};
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+      if (event.target == modal) { modal.style.display = "none"; }
     };
   }
 
@@ -86,14 +78,14 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
             ${theNameOfTrack}
         </a>
     </h3>`
-  if (isChromium){
+  if (isChromium) {
     // for some reason some files didn't play with audio tag in Chromium browsers
     trackPlaying.innerHTML += `
       <video onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
         your browers doesn't support this file or the the file is corrupted
       </video>
       <button id="saveTrackBtn"> SAVE </button> `;
-  }else{
+  } else {
     trackPlaying.innerHTML += `
       <audio onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
         your browers doesn't support this file or the the file is corrupted
@@ -108,9 +100,8 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
       album: 'Vaheguru Jio'
     })
   }
+  localStorage.setItem("LastPlayed: " + keertani, trkInd)
 }
-navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack)
-navigator.mediaSession.setActionHandler('nexttrack', playNextTrack)
 
 function saveTrack() {
   const note = document.getElementById("noteForSavedTrack");
@@ -199,12 +190,18 @@ function toggleSavedTracks() {
     const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
     li = document.createElement("li");
     li.innerHTML = `
-<button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
-<button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
-<p>${trkMsg}</p>
-`;
+      <button onclick="playTrack(${theTrackInd},true,'${trkMsg}')" > ${theNameOfTrack}</button> 
+      <button onclick="deleteSavedTrack(${theTrackInd})" >DELETE</button>
+      <p>${trkMsg}</p>`;
     ol.appendChild(li);
     console.log(theNameOfTrack, ": ", trkMsg);
   }
 }
 
+function playTrackFromLastTime() {
+  let trackInd = localStorage.getItem("LastPlayed: " + keertani);
+  if (trackInd)
+    playTrack(trackInd, true);
+  else
+    console.log("Could not get link from last session!")
+}
