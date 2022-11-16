@@ -1,17 +1,30 @@
 let isChromium = false;
-try {
-  isChromium = !!window.chrome;
-} catch (err) {
-  console.log(err);
-}
+/* try { */
+/*   isChromium = !!window.chrome; */
+/* } catch (err) { */
+/*   console.log(err); */
+/* } */
 
 const tracksPlayed = [];
 let currentTrackPointer = -1;
 const keertani = document.getElementById("MainTitle").innerText;
 playTrackFromLastTime()
 
-navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack)
-navigator.mediaSession.setActionHandler('nexttrack', playNextTrack)
+/* navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack) */
+/* navigator.mediaSession.setActionHandler('nexttrack', playNextTrack) */
+
+navigator.mediaSession.setActionHandler('previoustrack', () => playPreviousTrack())
+navigator.mediaSession.setActionHandler('nexttrack', () => playNextTrack())
+navigator.mediaSession.setActionHandler('play', () => {
+  const theAudioPlayer = document.getElementsByTagName('audio')[0]
+  console.log("Played");
+  theAudioPlayer.play()
+})
+navigator.mediaSession.setActionHandler('pause', () => {
+  const theAudioPlayer = document.getElementsByTagName('audio')[0]
+  console.log("Paused");
+  theAudioPlayer.pause()
+})
 
 function playNextTrack() {
   document.getElementById("playNext").innerHTML = "Next &rarr;";
