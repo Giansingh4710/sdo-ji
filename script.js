@@ -69,9 +69,9 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
     // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("close")[0];
     // When the user clicks the button, open the modal
-    btn.onclick = function() { modal.style.display = "block";};
+    btn.onclick = function() { modal.style.display = "block"; };
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() { modal.style.display = "none";};
+    span.onclick = function() { modal.style.display = "none"; };
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) { modal.style.display = "none"; }
@@ -79,7 +79,7 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
   }
 
   const trackPlaying = document.getElementById("trackPlaying");
-  const theNameOfTrack = TRACK_NAMES[trkInd];
+  const theNameOfTrack = getNameOfTrack(TRACK_LINKS[trkInd]);
   const theLinkOfTrack = TRACK_LINKS[trkInd];
   trackPlaying.innerHTML = `
     <h3>
@@ -145,26 +145,31 @@ function putTrackInLocalStorage(trackInd, note) {
   localStorage.setItem(keertani, JSON.stringify(savedTracks));
 }
 
-const trackNamesWithNums = TRACK_NAMES.map((elem, ind) => {
-  const withNum = ind + 1 + ") " + elem.toLowerCase();
-  return withNum;
-});
-
 function searchForShabad(e) {
   const searchVal = e;
   const ol = document.getElementById("searchResults");
 
-  const allTracksWithWord = trackNamesWithNums.filter((title) =>
-    title.includes(searchVal.toLowerCase())
+  const allLinksWithWord = [];
+
+  const searchWordsLst = searchVal.toLowerCase()
+  TRACK_LINKS.forEach((link, index) => {
+    const trackName = getNameOfTrack(link)
+    let allWordsInTrackName = true
+    for(const word of searchWordsLst){
+      if (! trackName.includes(word)){
+        allWordsInTrackName = false;
+      }
+    }
+    if( allWordsInTrackName)
+      allLinksWithWord.push({ trackName, index});
+  }
   );
 
-  ol.innerHTML = "";
+  ol.innerHTML = `<p>${allLinksWithWord.length} Results Found</p>`;
   if (searchVal === "") return;
-  for (let track of allTracksWithWord) {
-    const theNameOfTrack = track;
-    const theTrackInd = parseInt(track.split(") ")[0]) - 1;
+  for (const { trackName, index } of allLinksWithWord) {
     li = document.createElement("li");
-    li.innerHTML = `<button onclick="playTrack(${theTrackInd},true)">${theNameOfTrack}</button>`;
+    li.innerHTML = `<button onclick="playTrack(${index},true)">${trackName}</button>`;
     ol.appendChild(li);
   }
 }
@@ -180,26 +185,8 @@ function toggleSavedTracks() {
   let savedTracks = localStorage.getItem(keertani);
   savedTracks = JSON.parse(savedTracks);
 
-  function transferOldSaved() {
-    const oldTitle =
-      "All keertanis (SDO Ji,Bhai HPS Ji,Giani Amolak Singh Ji, Bhai Jeevan Singh Ji)";
-    console.log("checked if need to tranfer");
-    if (!localStorage[oldTitle]) return;
-    console.log("transfering....");
-
-    let _savedTracks = localStorage.getItem(oldTitle);
-    _savedTracks = JSON.parse(_savedTracks);
-
-    for (const theTrackInd in _savedTracks) {
-      const trkMsg = _savedTracks[theTrackInd].replace("\n", " ");
-      putTrackInLocalStorage(theTrackInd, trkMsg);
-    }
-    delete localStorage[oldTitle];
-  }
-
-  transferOldSaved();
   for (const theTrackInd in savedTracks) {
-    const theNameOfTrack = TRACK_NAMES[theTrackInd];
+    const theNameOfTrack = getNameOfTrack(TRACK_LINKS[theTrackInd])
     const trkMsg = savedTracks[theTrackInd].replace("\n", " ");
     li = document.createElement("li");
     li.innerHTML = `
@@ -218,3 +205,5 @@ function playTrackFromLastTime() {
   else
     console.log("Could not get link from last session!")
 }
+
+function getNameOfTrack(link) { return link.split('/').slice(-1)[0] }

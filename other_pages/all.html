@@ -88,18 +88,6 @@
     ...OTHER_SDO_TRACK_LINKS2,
     ...DULLAJI_LINKS,
   ];
-  let TRACK_NAMES = [
-    ...SDO_TRACK_NAMES,
-    ...HPS_TRACK_NAMES,
-    ...SABADVARTARA_TRACK_NAMES,
-    ...GIANI_AMOLAK_TRACK_NAMES,
-    ...BHAI_JEEVAN_SINGH_JI_NAMES,
-    ...OTHER_SDO_TRACK_NAMES,
-    ...TALWARAJI_TRACK_NAMES,
-    ...ANJAAN_JI_NAMES,
-    ...OTHER_SDO_TRACK_NAMES2,
-    ...DULLAJI_NAMES,
-  ];
 </script>
 <script type="text/javascript" src="../script.js"></script>
 
@@ -113,7 +101,7 @@
     const randNum = Math.floor(Math.random() * TRACK_LINKS.length);
     for (const opt in ALL_OPTS) {
       if (opt == "noAKV" && ALL_OPTS[opt]) {
-        const trackTitle = TRACK_NAMES[randNum].toLowerCase()
+        const trackTitle = TRACK_LINKS[randNum].toLowerCase()
         if (trackTitle.includes("akv") || trackTitle.includes("adv")) {
           console.log(trackTitle, "track is akv")
           playRandTrack();
