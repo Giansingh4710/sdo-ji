@@ -27,9 +27,8 @@ navigator.mediaSession.setActionHandler('pause', () => {
 })
 
 function playNextTrack() {
-  document.getElementById("playNext").innerHTML = "Next &rarr;";
   if (tracksPlayed.length - 1 == currentTrackPointer) {
-    playRandTrack();
+    playTrack(tracksPlayed[currentTrackPointer]+1,true);
     return;
   }
   currentTrackPointer += 1;
@@ -38,6 +37,9 @@ function playNextTrack() {
 
 function playPreviousTrack() {
   if (currentTrackPointer < 1) {
+    const newTrkInd = tracksPlayed[currentTrackPointer]-1;
+    tracksPlayed.unshift(newTrkInd);
+    playTrack(newTrkInd);
     return;
   }
   currentTrackPointer -= 1;
@@ -47,11 +49,12 @@ function playPreviousTrack() {
 function playRandTrack() {
   const randNum = Math.floor(Math.random() * TRACK_LINKS.length);
   tracksPlayed.push(randNum);
-  currentTrackPointer += 1;
+  currentTrackPointer = tracksPlayed.length - 1;
   playTrack(randNum);
 }
 
 function playTrack(trkInd, pushToLst = false, showMsg = false) {
+  console.log(tracksPlayed,currentTrackPointer)
   const h4 = document.getElementById("trackMsg");
   h4.innerText = "";
   if (pushToLst) {
@@ -151,25 +154,27 @@ function searchForShabad(e) {
 
   const allLinksWithWord = [];
 
-  const searchWordsLst = searchVal.toLowerCase()
+  const searchWordsLst = searchVal.toLowerCase().split(' ')
   TRACK_LINKS.forEach((link, index) => {
-    const trackName = getNameOfTrack(link)
+    /* const trackName = getNameOfTrack(link) */
+    const trackName = link.toLowerCase()
     let allWordsInTrackName = true
     for(const word of searchWordsLst){
-      if (! trackName.includes(word)){
+      if (!trackName.includes(word)){
         allWordsInTrackName = false;
+        break
       }
     }
-    if( allWordsInTrackName)
-      allLinksWithWord.push({ trackName, index});
-  }
-  );
+    if(allWordsInTrackName){
+      allLinksWithWord.push(index);
+    }
+  });
 
   ol.innerHTML = `<p>${allLinksWithWord.length} Results Found</p>`;
   if (searchVal === "") return;
-  for (const { trackName, index } of allLinksWithWord) {
+  for (const index of allLinksWithWord) {
     li = document.createElement("li");
-    li.innerHTML = `<button onclick="playTrack(${index},true)">${trackName}</button>`;
+    li.innerHTML = `<button onclick="playTrack(${index},true)">${getNameOfTrack(TRACK_LINKS[index])}</button>`;
     ol.appendChild(li);
   }
 }
@@ -199,7 +204,7 @@ function toggleSavedTracks() {
 }
 
 function playTrackFromLastTime() {
-  let trackInd = localStorage.getItem("LastPlayed: " + keertani);
+  const trackInd = parseInt(localStorage.getItem("LastPlayed: " + keertani));
   if (trackInd)
     playTrack(trackInd, true);
   else
