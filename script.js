@@ -1,17 +1,7 @@
-let isChromium = false;
-/* try { */
-/*   isChromium = !!window.chrome; */
-/* } catch (err) { */
-/*   console.log(err); */
-/* } */
-
 const tracksPlayed = [];
 let currentTrackPointer = -1;
 const keertani = document.getElementById("MainTitle").innerText;
 playTrackFromLastTime()
-
-/* navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack) */
-/* navigator.mediaSession.setActionHandler('nexttrack', playNextTrack) */
 
 navigator.mediaSession.setActionHandler('previoustrack', () => playPreviousTrack())
 navigator.mediaSession.setActionHandler('nexttrack', () => playNextTrack())
@@ -70,47 +60,27 @@ function playTrack(trkInd, pushToLst = false, showMsg = false) {
 
   function activateModal() {
     let modal = document.getElementById("myModal");
-    // Get the button that opens the modal
     let btn = document.getElementById("saveTrackBtn");
-    // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("close")[0];
-    // When the user clicks the button, open the modal
     btn.onclick = function() { modal.style.display = "block"; };
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function() { modal.style.display = "none"; };
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) { modal.style.display = "none"; }
     };
   }
 
-  const trackPlaying = document.getElementById("trackPlaying");
   const theNameOfTrack = getNameOfTrack(TRACK_LINKS[trkInd]);
   const theLinkOfTrack = TRACK_LINKS[trkInd];
-  trackPlaying.innerHTML = `
-    <h3>
-        <a 
-          href=${theLinkOfTrack.replaceAll(" ", "%20")} 
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-            ${theNameOfTrack}
-        </a>
-    </h3>`
-  if (isChromium) {
-    // for some reason some files didn't play with audio tag in Chromium browsers
-    trackPlaying.innerHTML += `
-      <video onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
-        your browers doesn't support this file or the the file is corrupted
-      </video>
-      <button id="saveTrackBtn"> SAVE </button> `;
-  } else {
-    trackPlaying.innerHTML += `
-      <audio onended="playNextTrack()" onerror="" controls autoPlay={true} src='${theLinkOfTrack}' >
-        your browers doesn't support this file or the the file is corrupted
-      </audio>
-      <button id="saveTrackBtn"> SAVE </button> `;
-  }
+
+  const aTag = document.getElementById("trackNameAtag");
+  const audioTag = document.getElementsByTagName("audio")[0];
+
+  aTag.innerText = theNameOfTrack;
+  aTag.href = theLinkOfTrack;
+  audioTag.src = theLinkOfTrack
+
+  document.getElementById("trackPlaying").style.display = "block"
+
   activateModal();
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({

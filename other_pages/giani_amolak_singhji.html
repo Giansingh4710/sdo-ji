@@ -20,22 +20,21 @@
 
 <body class="app">
   <h1 id="MainTitle">Giani Amolak Singh Ji</h1>
-  <div id="trackPlaying"></div>
+
+  <div id="trackPlaying">
+    <h3><a id="trackNameAtag" target="_blank" rel="noopener noreferrer"></a></h3>
+    <audio onended="playNextTrack()" onerror="" controls autoPlay="true"></audio>
+    <button id="saveTrackBtn"> SAVE </button>
+  </div>
 
   <div>
     <h4 id="trackMsg"></h4>
     <button onclick="playPreviousTrack()">&#8592; Previous</button>
-    <button id="playRandomTrack" onclick="playRandTrack()">
-      Random Track
-    </button>
-    <button  autofocus="autofocus" onclick="playNextTrack()">
-      Next &rarr;
-    </button>
+    <button id="playRandomTrack" onclick="playRandTrack()">Random Track</button>
+    <button autofocus="autofocus" onclick="playNextTrack()">Next &rarr;</button>
   </div>
 
-  <!-- The Modal -->
   <div id="myModal" class="modal">
-    <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times;</span>
       <label for="noteForSavedTrack">Enter a note if you would like (not needed):</label>
