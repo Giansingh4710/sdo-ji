@@ -28,7 +28,10 @@ navigator.mediaSession.setActionHandler('pause', () => {
 
 function playNextTrack() {
   if (tracksPlayed.length - 1 == currentTrackPointer) {
-    playTrack(tracksPlayed[currentTrackPointer]+1,true);
+    if (tracksPlayed.length === 0)
+      playRandTrack()
+    else
+      playTrack(tracksPlayed[currentTrackPointer]+1,true);
     return;
   }
   currentTrackPointer += 1;
