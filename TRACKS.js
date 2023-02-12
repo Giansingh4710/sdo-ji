@@ -2556,6 +2556,7 @@ const TALWARAJI_TRACK_LINKS=[
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Joginder Singh Talwara/Ulaahano mai kaahoo na deeo.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Joginder Singh Talwara/Veeaah hoaa merey baabulaa.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Joginder Singh Talwara/Visar Naahee Daataar.mp3",
+
   "https://www.ikirtan.com//Bhai_Joginder_Singh_Jee_Talwara/Bhaaee Joginder Singh %28Aao sakhee har meyl kareyhaa%29.mp3",
   "https://www.ikirtan.com//Bhai_Joginder_Singh_Jee_Talwara/Bhaaee Joginder Singh %28Aithhai Othhai mukat hai jin raam pachhaaney%29.mp3",
   "https://www.ikirtan.com//Bhai_Joginder_Singh_Jee_Talwara/Bhaaee Joginder Singh %28Anoop padaarath naam sunoh%29.mp3",
@@ -2655,6 +2656,7 @@ const BHAI_MEHAR_SINGH_LINKS=[
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Mehar Singh/Bhai Mehar Singh - Man than raam ko biouhaar - Dehli 1963.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Mehar Singh/Bhai Mehar Singh - Sae sanjog karahu maerae piaarae.MP3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Mehar Singh/Bhai Mehar Singh - Yaar vae nith sukh sukhaedhee saa mai paaee - Dehli 1991.mp3",
+
   "http://45.41.235.33/~daassto1/audios/keertan/bhai_mehar_singh/1960s (gun Keerat Nidh Moree).mp3",
   "http://45.41.235.33/~daassto1/audios/keertan/bhai_mehar_singh/1960s (man Tan Siaam Ko Biohaar).mp3",
   "http://45.41.235.33/~daassto1/audios/keertan/bhai_mehar_singh/1990 (gobind Jeeo Bikh Homai).mp3",
@@ -3185,6 +3187,7 @@ const DULLAJI_LINKS=[
   "http://45.41.235.33/~daassto1/audios/keertan/dulla_ji/sc/vaaho vaaho kiaa khoob gaavataa hai (Puratan Kirtan).mp3",
   "http://45.41.235.33/~daassto1/audios/keertan/dulla_ji/sc/vadh sukh rainarreei priaa prem lagaa (Puratan Kirtan).mp3",
   "http://45.41.235.33/~daassto1/audios/keertan/dulla_ji/sc/vas mere piaariaa vas mere govindaa (Puratan Kirtan).mp3",
+
   "https://akj.media/Media/Keertan/Windsor/2022/010_Windsor_July2022_SatPM_RSK_BhaiTejinderpalSinghJeeDoolaVeerjee.mp3",
   "https://akj.media/Media/Keertan/Toronto/2022/014_Toronto_Feb2022_SaturdayAM_ADV_BhaiTejinderpalSinghJeeDoolaVeerjee.mp3",
   "https://akj.media/Media/Keertan/Toronto/2022/026_Toronto_Feb2022_SaturdayPM_AK_BhaiTejinderpalSinghJeeDoolaVeerjee.mp3",
@@ -3348,6 +3351,7 @@ const DULLAJI_LINKS=[
   "https://akj.media/Media/Keertan/Delhi/1991/004_Delhi_Oct1991_SatE_RSK_BhaiTejinderpalSinghJeeDoolaVeerjee.mp3",
   "https://akj.media/Media/Keertan/Amritsar/1990/011_Amritsar_Dec1990_Mor_AK_BhaiTejinderpalSinghJeeDoolaVeerjee.mp3",
   "https://akj.media/Media/Keertan/Amritsar/1984/001_Amritsar_Apr1984_SatE_RSK_BhaiTejinderpalSinghJeeDoolaVeerjee.mp3",
+
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Tejinderpal Singh Dulla/Bhai Tejinderpal Singh Dulla  - Andhar Sachaa Naehu Laaeiaa Preetham Aapanai.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Tejinderpal Singh Dulla/Bhai Tejinderpal Singh Dulla  - Aoudh Ghattai Dhinas Rainaarae.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Tejinderpal Singh Dulla/Bhai Tejinderpal Singh Dulla  - Baabaa Mai Karameheen Koorriaa.mp3",
@@ -3510,6 +3514,7 @@ const DULLAJI_LINKS=[
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Tejinderpal Singh Dulla/Bhai Tejinderpal Singh Dulla - Thumaree Aas Piaasaa Thumaree.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Tejinderpal Singh Dulla/Bhai Tejinderpal Singh Dulla - Thus dhithaa poorai sathiguroo har dhhan sach akhutt.mp3",
   "http://sikhsoul.com/golden_khajana_files/mp3/Keertan/Bhai Tejinderpal Singh Dulla/Bhai Tejinderpal Singh Dulla - Tumree Aas Piaasaa Tumree - India 1990s.mp3",
+
   "http://45.41.235.33/~daassto1/audios/keertan/dulla_ji/yt/AAD  WAHEGURU _ Bhai Gurpreet Singh _ Shimla Wale _ Shabad Gurbani-TjVv9x4tWPM.mp3",
   "http://45.41.235.33/~daassto1/audios/keertan/dulla_ji/yt/Aithe Milan Vadaiya I Dr. Tejinder Pal Singh _ Dulla Ji-fiT3xpW41Mg.m4a",
   "http://45.41.235.33/~daassto1/audios/keertan/dulla_ji/yt/Aithe Milan Vadaiya I Dr. Tejinder Pal Singh _ Dulla Ji-fiT3xpW41Mg.mp3",
